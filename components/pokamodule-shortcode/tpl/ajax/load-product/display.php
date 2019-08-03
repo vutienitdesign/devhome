@@ -1,10 +1,32 @@
 <?php
-	$termID = intval($_POST['term_id']);
+	$termID             = intval($_POST['term_id']);
 	$dataProductCurrent = intval($_POST['data_product_current']);
-	$paged = max(1, $_POST['paged']);
-	$productExit = $_POST['product_exist'];
-	$idProductTemp = $_POST['id-proudct-temp'];
-	$typeProduct = ($_POST['type-proudct'] == 'add') ? 'add' : 'edit';
+	$paged              = max(1, $_POST['paged']);
+	$productExit        = $_POST['product_exist'];
+	$idProductTemp      = $_POST['id-proudct-temp'];
+	$nameProduct        = sanitize_text_field($_POST['name-product']);
+	$aAttributes        = isset($_POST['attributes']) ? (array)$_POST['attributes'] : array();
+	$typeProduct        = ($_POST['type-proudct'] == 'add') ? 'add' : 'edit';
+	
+	/*================================SATRT Get Search Attributes================*/
+	$aDataSearch = array();
+	$terms = get_term_by('id', $termID, 'product_cat');
+	$sSlug = $terms->slug;
+	
+	$args = array('category'  => array($sSlug));
+	foreach( wc_get_products($args) as $product ){
+		foreach( $product->get_attributes() as $attr_name => $attr ){
+			$attrLabel =  wc_attribute_label($attr_name);
+			foreach( $attr->get_terms() as $term ){
+				$aDataSearch[$attrLabel][$term->slug] = array(
+					'slug' => $term->slug,
+					'name' => $term->name,
+					'taxonomy' => $attr_name,
+				);
+			}
+		}
+	}
+	/*================================END Get Search Attributes================*/
 	
 	$productExit = ltrim($productExit, ',');
 	$aProductExit = array();
@@ -15,8 +37,9 @@
 	$args = array(
 		'post_status' => array('publish'),
 		'post_type' => array('product'),
-		'posts_per_page' => 4,
+		'posts_per_page' => 6,
 		'paged' => $paged,
+		's' => $nameProduct,
 		'tax_query' => array(
 			'relation' => 'AND',
 			array(
@@ -26,6 +49,26 @@
 			),
 		),
 	);
+	
+	$msg = '';
+	$arrAttr = array();
+	if(is_array($aAttributes) && !empty($aAttributes)){
+		$msg = $aAttributes;
+		
+		foreach($aAttributes as $kAttr => $vAttr){
+			$arrAttr[$vAttr][] = $kAttr;
+		}
+		
+		foreach($arrAttr as $kAttr => $vAttr){
+			$args['tax_query'][] = array(
+				'taxonomy' => $kAttr,
+				'field' => 'slug',
+				'terms' => $vAttr,
+//				'operator' => 'IN',
+				'operator' => 'AND'
+			);
+		}
+	}
 	
 	$sortOrderBy = 'date-desc';
 	$sSort       = 'date';
@@ -60,7 +103,6 @@
 		$args['order'] = 'DESC';
 		$args['orderby'] = 'date';
 	}
-	
 	
 	$the_query = new WP_Query($args);
 	
@@ -148,8 +190,8 @@
 	
 	$sHtmlSort = '';
 	$aSort = array(
-		'date-desc'  => 'Sắp xếp thời gian từ mới đến cũ 1',
-		'date'       => 'Sắp xếp theo thời gian từ cũ đến mới 1',
+		'date-desc'  => 'Sắp xếp thời gian từ mới đến cũ',
+		'date'       => 'Sắp xếp theo thời gian từ cũ đến mới',
 		'price'      => 'Sắp xếp theo giá: thấp đến cao',
 		'price-desc' => 'Sắp xếp theo giá: cao đến thấp'
 	);
@@ -161,37 +203,44 @@
 		}
 	}
 	
+	$sHtmlAttr = '';
+	if(!empty($aDataSearch)){
+		foreach($aDataSearch as $k => $v){
+			$sHtmlAttr .= '
+						<div class="group-search">
+							<h5 class="title-filter">'.$k.'</h5>
+							<ul class="box-filter">';
+			
+			foreach($v as $vTmp){
+				$sChecked = '';
+				foreach($aAttributes as $kAttr => $vAttr){
+					if($kAttr == $vTmp['slug'] && $vAttr == $vTmp['taxonomy']){
+						$sChecked ='checked="checked"';
+						break;
+					}
+				}
+				$sHtmlAttr .= '<li><input '.$sChecked.' class="search-attr" id="'.$vTmp['taxonomy'].'-'.$vTmp['slug'].'" type="checkbox" value="'.$vTmp['slug'].'" data-taxonomy="'.$vTmp['taxonomy'].'"><label for="'.$vTmp['taxonomy'].'-'.$vTmp['slug'].'">'.$vTmp['name'].'</label></li>';
+			}
+								
+            $sHtmlAttr .=	'</ul>
+							<div class="clear"></div>
+						</div>';
+		}
+	}
 	
 	$sHtml = '<div class="modal-content box-choose-product">
 				<div class="modal-header">
-					<span class="close">&times;</span>
 					<h2 class="title">Chọn sản phẩm</h2>
+					<div class="box-close"><span class="close">&times;</span></div>
+					<div class="search-name">
+						<input type="text" class="value-text" placeholder="Nhập tên sản phẩm..." value="'.$nameProduct.'">
+						<button type="submit" class="btn btn-search"><i class="ec ec-search"></i></button>
+					</div>
 				</div>
 				<div class="modal-body">
 					<div class="loader"></div>
 					<div class="box-left">
-						<div class="group-search">
-							<h5 class="title-filter">Hãng sản xuất</h5>
-							<ul class="box-filter">
-								<li><input type="checkbox">AMD(15)</li>
-								<li><input type="checkbox">Intel(15)</li>
-								<li><input type="checkbox">Core i5(15)</li>
-								<li><input type="checkbox">Core i9(15)</li>
-								<li><input type="checkbox">Core i3(15)</li>
-							</ul>
-							<div class="clear"></div>
-						</div>
-						<div class="group-search">
-							<h5 class="title-filter">Dòng CPU</h5>
-							<ul class="box-filter">
-								<li><input type="checkbox">AMD(15)</li>
-								<li><input type="checkbox">Intel(15)</li>
-								<li><input type="checkbox">Core i5(15)</li>
-								<li><input type="checkbox">Core i9(15)</li>
-								<li><input type="checkbox">Core i3(15)</li>
-							</ul>
-							<div class="clear"></div>
-						</div>
+						'.$sHtmlAttr.'
 					</div>
 					<div class="box-right">
 						<div class="box-action">

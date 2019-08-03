@@ -20,5 +20,4 @@
 	define("_POKA_HOME_PATH_",              ABSPATH);
 	
 	define("_REAL_TIME_",                   (time()+25202));
-
 	
