@@ -1,0 +1,71 @@
+.poka_images_container{
+    .ui-sortable-placeholder {
+        margin: 5px;
+        display: inline-block;
+        width: 150px;
+    }
+
+    .group-item{
+        display: inline-block;
+        margin: 5px;
+        position: relative;
+        cursor: all-scroll;
+    }
+
+    .item img{
+        width: 100%;
+    }
+
+    input{
+        border-radius: 3px !important;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+
+    .poka-btn-remove-image{
+        position: absolute;
+        top: -10px;
+        right: -5px;
+        font-size: 14px;
+        background-color: #dfdfdf;
+        color: #000;
+        padding: 3px 7px 5px 7px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        border-radius: 10px;
+        z-index: 999;
+        font-weight: bold;
+        cursor: pointer;
+
+        &:hover{
+            color: #fff;
+            background-color: red;
+            -webkit-transition: 0.4s;
+            -moz-transition: 0.4s;
+            -ms-transition: 0.4s;
+            -o-transition: 0.4s;
+            transition: 0.4s;
+        }
+    }
+}
+
+.poka_upload_image_button{
+    text-decoration: none;
+    border: 1px solid #ddd;
+    padding: 5px 10px;
+    background-color: #dfdfdf;
+    color: #000;
+    font-weight: 500;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    display: inline-block;
+    margin-bottom: 10px;
+
+    &:hover{
+        background-color: #0073aa;
+        color: #fff;
+    }
+}

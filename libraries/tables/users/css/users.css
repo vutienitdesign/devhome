@@ -1,0 +1,8 @@
+.column-price .price{
+    color: #fff;
+    font-weight: bold;
+    background: red;
+    border: 1px solid red;
+    padding: 10px 20px;
+    display: inline-block;
+}

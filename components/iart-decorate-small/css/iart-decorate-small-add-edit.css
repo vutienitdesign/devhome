@@ -1,0 +1,13 @@
+.box-decorate-medium {
+  display: inline-block;
+  position: relative; }
+  .box-decorate-medium .fa-spin {
+    position: absolute;
+    margin-top: 10px;
+    display: inline-block;
+    margin-right: 7px;
+    top: 14px;
+    left: 50%;
+    color: red; }
+
+/*# sourceMappingURL=iart-decorate-small-add-edit.css.map */

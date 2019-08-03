@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,KAAK;EACD,UAAU,EAAE,IAAI;EAChB,UAAU,EAAE,IAAI;EAChB,OAAO,EAAE,SAAS;EAClB,MAAM,EAAE,iBAAiB;EAEzB,WAAK;IACD,UAAU,EAAE,MAAM;IAElB,eAAG;MACC,KAAK,EAAE,KAAK",
+"sources": ["iart-asia.scss"],
+"names": [],
+"file": "iart-asia.css"
+}

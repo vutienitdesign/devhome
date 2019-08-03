@@ -1,0 +1,33 @@
+.poka-widget-filter-product{
+    .item{
+        border: 1px solid #ECECEC;
+        padding: 3px;
+        margin-bottom: 20px;
+        padding: 10px;
+
+        &:last-child{
+            margin-bottom: 0;
+        }
+
+        .label{
+            margin-bottom: 10px;
+        }
+
+        .min{
+            float: left;
+            width: 45%;
+        }
+
+        .max{
+            float: right;
+            width: 45%;
+        }
+
+        span{
+            float: left;
+            width: 10%;
+            text-align: center;
+            padding-top: 5px;
+        }
+    }
+}

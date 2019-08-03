@@ -1,0 +1,35 @@
+i.mce-i-hammer:after{
+	font-family: dashicons;
+	content: "\f308";
+	font-size: 20px;
+
+}
+
+i.mce-i-cart:after{
+	font-family: dashicons;
+	content: "\f174";
+	font-size: 20px;
+
+}
+
+span.highlight {
+    background: #cccccc59;
+    display: block;
+    padding: 10px;
+}
+
+#poka-tinymce-module-shortcode .mce-textbox.mce-abs-layout-item{
+	width: 50% !important;
+}
+
+#poka-tinymce-module-shortcode .mce-btn.mce-abs-layout-item{
+	width: auto !important;
+}
+
+.poka-msc-search .poka-checkbox{
+	float: right;
+}
+
+.poka-msc-search .item{
+	margin-bottom: 10px;
+}
