@@ -24,13 +24,13 @@
 		
 		$sHtml .= $sHtmlChoose;
 		$sHtml .= '</div>
-			<div class="action">
-				<button type="button" class="bottom btn-step1">Next <i class="fa fa-angle-right"></i></button>
-			</div>
-			
-			<div class="clear"></div>
-		</div>
-	</div>';
+							<div class="action">
+								<button type="button" class="bottom btn-step1">Next <i class="fa fa-angle-right"></i></button>
+							</div>
+							
+							<div class="clear"></div>
+						</div>
+					</div>';
 	}
 	
 	echo json_encode(

@@ -34,16 +34,6 @@ class POKA_MetaBox_Product {
 			}else{
 				delete_post_meta($postID, 'show_product');
 			}
-			
-			if(isset($_POST['_featured_products']) && !empty($_POST['_featured_products'])){
-				$arr = array(
-					'id' => $_POST['_featured_products'],
-					'url' => wp_get_attachment_image_src($_POST['_featured_products'], 'full')[0]
-				);
-				update_post_meta($postID, '_featured_products', $arr);
-			}else{
-				delete_post_meta($postID, '_featured_products');
-			}
 		}
 	}
 	

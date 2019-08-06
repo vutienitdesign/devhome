@@ -1,0 +1,12 @@
+.list-product {
+  background-color: #ffffff;
+  padding: 20px 10px; }
+  .list-product th {
+    padding: 15px 10px; }
+  .list-product th,
+  .list-product td {
+    border-top: 1px solid #eceeef; }
+  .list-product .center {
+    text-align: center; }
+
+/*# sourceMappingURL=category_product_tag_edit.css.map */

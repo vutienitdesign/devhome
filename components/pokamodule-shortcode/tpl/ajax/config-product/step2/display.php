@@ -15,7 +15,7 @@
 				'step1' => $id
 			);
 			
-			$sql = "SELECT `id`, `name_show` FROM `{$wpdb->prefix}decorate_medium` WHERE `decorate_large` = {$id}";
+			$sql = "SELECT `id`, `name_show`, `max` FROM `{$wpdb->prefix}decorate_medium` WHERE `decorate_large` = {$id}";
 			$result = $wpdb->get_results($sql);
 			
 			if(!empty($result)){
@@ -37,11 +37,12 @@
 						'id' => $v->id,
 						'value' => 1
 					);
-					$sHtml .= '<div class="item"><label class="lbl">'.$v->name_show.'</label><input type="number" class="input-text" value="1" data-id="'.$v->id.'"></div>';
+					$sHtml .= '<div class="item"><label class="lbl">'.$v->name_show.'</label><input type="number" class="input-text config-amount" value="1" data-id="'.$v->id.'" min="1" max="'.$v->max.'"></div>';
 					
 					$i++;
 				}
 				$_SESSION['iart_config_product']['step2'] = $arrStep;
+				$_SESSION['iart_config_product']['step3'] = array();
 				
 				$sHtml .= '</div>
 							<div class="action">

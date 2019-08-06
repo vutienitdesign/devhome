@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,aAAa;EACT,gBAAgB,EAAE,OAAO;EACzB,OAAO,EAAE,SAAS;EAElB,gBAAE;IACE,OAAO,EAAE,SAAS;EAGtB;kBACE;IACE,UAAU,EAAE,iBAAiB;EAGjC,qBAAO;IACH,UAAU,EAAE,MAAM",
+"sources": ["category_product_tag_edit.scss"],
+"names": [],
+"file": "category_product_tag_edit.css"
+}

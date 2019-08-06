@@ -65,6 +65,11 @@
 				case "ajax-add-product":
 					$this->showAddProduct();
 					break;
+				
+				//Set Cart
+				case "ajax-update-cart":
+					$this->updateCart();
+					break;
 					
 				default:
 					die("NOTHING");
@@ -129,6 +134,12 @@
 		private function showAddProduct(){
 			check_ajax_referer('ajax-security-code', 'security');
 			require_once $this->sPath . '/tpl/ajax/add-product/display.php';
+			die();
+		}
+		
+		private function updateCart(){
+			check_ajax_referer('ajax-security-code', 'security');
+			require_once $this->sPath . '/tpl/ajax/update-cart/display.php';
 			die();
 		}
 	}

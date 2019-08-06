@@ -31,6 +31,7 @@
 						`decorate_large` int(11),
 						`name` varchar(255),
 						`name_show` varchar(255),
+						`max` int(11),
 						`tag` text,
 						PRIMARY KEY (id)
 				) DEFAULT CHARACTER SET = 'utf8' DEFAULT COLLATE 'utf8_general_ci';";

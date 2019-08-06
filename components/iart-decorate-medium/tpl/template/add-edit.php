@@ -29,6 +29,7 @@
 	
 	$vName     = '';
 	$vNameShow = '';
+	$nMax      = 2;
 	
 	$sTitle         = '';
 	
@@ -42,6 +43,7 @@
 	
 	    $vName     = $data['name'];
 	    $vNameShow = $data['name_show'];
+	    $nMax      = $data['max'];
 	
 	    if(empty($data)){
 		    $url = 'admin.php?page=' . $_REQUEST['page'];
@@ -113,6 +115,13 @@
                     <td>
                         <input name="poka[name_show]" type="text" value="<?php echo $vNameShow; ?>" class="regular-text">
                         <p class="description">Ví dụ: Có bao nhiêu phòng ngủ?</p>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Tối đa</th>
+                    <td>
+                        <input name="poka[max]" type="number" value="<?php echo $nMax; ?>" class="regular-text">
+                        <p class="description">Số lượng tối đa cho không gian vừa này. Mặc đinh: 2</p>
                     </td>
                 </tr>
                 <tr>

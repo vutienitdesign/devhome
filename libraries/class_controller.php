@@ -95,6 +95,7 @@
 			}else{
 				$sAjaxURL = ""; // Non-admin actions
 			}
+			
 			$sAjaxURL = admin_url('admin-ajax.php') . '?action=' . $sAjaxURL;
 			
 			echo "<script type='text/javascript'>

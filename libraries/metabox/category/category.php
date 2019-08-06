@@ -98,6 +98,25 @@
 				);
 			}
 			
+			$aShowProduct = !empty($_POST['show_product']) ? $_POST['show_product'] : '';
+			$aProduct = !empty($_POST['all_product']) ? $_POST['all_product'] : '';
+			$aProduct = !empty($aProduct) ? explode(',', $aProduct) : '';
+			
+			
+			if(!empty($aProduct)){
+				foreach($aProduct as $v){
+					if(in_array($v, $aShowProduct)){
+						update_post_meta($v, 'show_product', 'no');
+					}else{
+						delete_post_meta($v, 'show_product');
+					}
+				}
+			}
+			
+			if(isset($_POST['priority'])){
+				$arrData['priority'] = $_POST['priority'];
+			}
+			
 			if(!empty($arrData)){
 				update_option("poka_product_tag_" . $term_id, $arrData);
 			}
@@ -109,17 +128,24 @@
 				if($key == "name"){
 					$new['image'] = 'Thumbnail';
 				}
+				if($key == "posts"){
+					$new['priority'] = 'Priority';
+				}
 				$new[ $key ]     = $title;
 			}
 			return $new;
 		}
 		
 		function column_content_product_tag( $value, $column_name, $tax_id ){
-			if($column_name == 'image' || $column_name == 'priority' || $column_name == 'gallery'){
+			if($column_name == 'image' || $column_name == 'priority'){
 				$aData = get_option("poka_product_tag_" . $tax_id);
 				if(!empty($aData)){
 					if($column_name == 'image'){
 						return '<img height="48" width="48" src="'.wp_get_attachment_image_src($aData['image']['id'])[0].'" />';
+					}
+					
+					if($column_name == 'priority'){
+						return '<a target="_blank" href="'.get_permalink($aData['priority']).'">'.get_the_title($aData['priority']).'</a>';
 					}
 				}
 			}
