@@ -70,12 +70,12 @@
 					'doAction'
 				));
 				
-				add_submenu_page('iart-asia', 'Không gian vừa', '- Không gian vừa', 'manage_options', 'iart-decorate-medium', array(
+				add_submenu_page('iart-asia', 'Không gian vừa', 'Không gian vừa', 'manage_options', 'iart-decorate-medium', array(
 					'POKA_Controller',
 					'doAction'
 				));
 				
-				add_submenu_page('iart-asia', 'Không gian nhỏ', '-- Không gian nhỏ', 'manage_options', 'iart-decorate-small', array(
+				add_submenu_page('iart-asia', 'Không gian nhỏ', 'Không gian nhỏ', 'manage_options', 'iart-decorate-small', array(
 					'POKA_Controller',
 					'doAction'
 				));

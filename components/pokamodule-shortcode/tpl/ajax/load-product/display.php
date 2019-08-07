@@ -4,8 +4,9 @@
 	$paged              = max(1, $_POST['paged']);
 	$productExit        = $_POST['product_exist'];
 	$idProductTemp      = $_POST['id-proudct-temp'];
+	$idProductChange    = $_POST['id-proudct-change']; //ID Sản phẩm update (thay đổi)
 	$nameProduct        = sanitize_text_field($_POST['name-product']);
-	$aAttributes        = isset($_POST['attributes']) ? (array)$_POST['attributes'] : array();
+	$aAttributes        = isset($_POST['attributes']) ? (array) $_POST['attributes'] : array();
 	$typeProduct        = ($_POST['type-proudct'] == 'add') ? 'add' : 'edit';
 	
 	/*================================SATRT Get Search Attributes================*/
@@ -106,6 +107,11 @@
 	
 	$the_query = new WP_Query($args);
 	
+	$sHtmlParam = 'data-type="add"';
+	if($typeProduct == 'edit'){
+		$sHtmlParam = 'data-type="add" data-product-edit=""';
+	}
+	
 	$sHtmlProduct = '';
 	if ( $the_query->have_posts() ) :
 		while ( $the_query->have_posts() ) : $the_query->the_post();
@@ -128,6 +134,7 @@
 				$sClassActive = 'activate-choose';
 			}
 			
+			
 			$sHtmlProduct .= '<div class="item '.$sClassActive.'">
 						<div class="image">
 							<a href="" target="_blank"><img src="'.$imageUrl.'" alt="'.$sTitle.'"></a>
@@ -143,7 +150,7 @@
 							</ul>
 						</div>
 						<div class="action">
-							<button type="button" value="'.$id.'" data-id="'.$dataProductCurrent.'" class="button alt add-config" data-type="'.$typeProduct.'" data-temp="'.$idProductTemp.'" data-term="'.$termID.'">Thêm vào cấu hình</button>
+							<button type="button" value="'.$id.'" data-id="'.$dataProductCurrent.'" class="button alt add-config" data-product="'.$idProductChange.'" data-type="'.$typeProduct.'" data-temp="'.$idProductTemp.'" data-term="'.$termID.'">Thêm vào cấu hình</button>
 						</div>
 						<div class="clear"></div>
 					</div>';

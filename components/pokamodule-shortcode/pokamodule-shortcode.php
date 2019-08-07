@@ -67,8 +67,18 @@
 					break;
 				
 				//Set Cart
-				case "ajax-update-cart":
-					$this->updateCart();
+				case "ajax-update-session":
+					$this->updateSession();
+					break;
+				
+				//POPUP thông báo tồn tại dữ liệu cũ
+				case "msg-session-data":
+					$this->msgSessionData();
+					break;
+				
+				//Upload Image
+				case "ajax-upload-image":
+					$this->ajaxUploadImage();
 					break;
 					
 				default:
@@ -137,9 +147,21 @@
 			die();
 		}
 		
-		private function updateCart(){
+		private function updateSession(){
 			check_ajax_referer('ajax-security-code', 'security');
-			require_once $this->sPath . '/tpl/ajax/update-cart/display.php';
+			require_once $this->sPath . '/tpl/ajax/update-session/display.php';
+			die();
+		}
+		
+		private function msgSessionData(){
+			check_ajax_referer('ajax-security-code', 'security');
+			require_once $this->sPath . '/tpl/ajax/msg-session-data/display.php';
+			die();
+		}
+		
+		private function ajaxUploadImage(){
+			check_ajax_referer('ajax-security-code', 'security');
+			require_once $this->sPath . '/tpl/ajax/upload-image/display.php';
 			die();
 		}
 	}

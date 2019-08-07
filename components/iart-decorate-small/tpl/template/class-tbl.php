@@ -126,9 +126,9 @@
 		
 		public function column_cat($item){
 			$terms = get_term_by('id', $item['cat'], 'product_cat' );
-			$sLink = get_term_link($terms);
-			
-			return '<a href="'.$sLink.'" target="_blank">'.$terms->name.'</a>';
+			if(!empty($terms)){
+				return '<a href="'.get_term_link($terms).'" target="_blank">'.$terms->name.'</a>';
+			}
 		}
 		
 		public function column_decorate_large($item){

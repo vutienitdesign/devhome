@@ -1,8 +1,9 @@
 <?php
-	$idProduct = $_POST['product_id'];
-	$dataID    = $_POST['data_id'];
-	$dataTerm  = $_POST['data-term'];
-	$product   = wc_get_product($idProduct);
+	$idProduct       = $_POST['product_id']; //Sản phẩm muốn thay đổi
+	$dataID          = $_POST['data_id'];
+	$dataTerm        = $_POST['data-term'];
+	$productIDChange = $_POST['product_id_change']; //Sản phẩm thay đổi
+	$product         = wc_get_product($idProduct);
 	
 	$sTitle   = $product->get_title();
 	$imageUrl = wp_get_attachment_image_src(get_post_thumbnail_id($idProduct))[0];
@@ -33,7 +34,7 @@
                     <td class="html-price">'.wc_price($product->get_price()).'</td>
                     <td class="action">
                        <div class="iart-tooltip">
-                            <i class="fa fa-edit edit-product" data-id="'.$dataID.'" data-term="'.$dataTerm.'" data-temp="'.$idRandom.'"></i>
+                            <i class="fa fa-edit edit-product" data-id="'.$dataID.'" data-term="'.$dataTerm.'" data-temp="'.$idRandom.'" data-product="'.$idProduct.'"></i>
                            <span class="tooltiptext">Sửa</span>
                        </div>
                        <div class="iart-tooltip">
@@ -42,13 +43,6 @@
                        </div>
                     </td>
                 </tr>';
-		
-		//Luu san pham vao Session
-		global $woocommerce, $pokaHelper;
-		$tabCurrent  = $_POST['tabcurrent'];
-		$pokaHelper->saveProductSession($tabCurrent, $dataID, $idProduct);
-		
-		$woocommerce->cart->add_to_cart($idProduct);
 	}
 	
 	echo json_encode(

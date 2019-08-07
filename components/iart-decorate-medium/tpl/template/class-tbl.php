@@ -151,9 +151,9 @@
 				
 				foreach($arr as $v){
 					$terms = get_term_by('id', $v, 'product_tag' );
-					$sLink = get_term_link($terms);
-					
-					$sHtml .= ', <a href="'.$sLink.'" target="_blank">'.$terms->name.'</a> ';
+					if(!empty($terms)){
+						$sHtml .= ', <a href="'.get_term_link($terms).'" target="_blank">'.$terms->name.'</a> ';
+					}
 				}
 				
 				$sHtml = ltrim($sHtml, ',');
