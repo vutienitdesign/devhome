@@ -87,28 +87,16 @@
                     <td>
                         <?php
 	                        $args = array(
-		                        'taxonomy'     => 'product_cat',
-		                        'orderby'      => 'name',
-		                        'show_count'   => 0,
-		                        'pad_counts'   => 0,
-		                        'hierarchical' => 1,
-		                        'title_li'     => '',
-		                        'hide_empty'   => 0
-	                        );
-	                        $arrCat = get_categories( $args );
-	
-	                        $sHtml = '';
-	                        foreach($arrCat as $v){
-		                        if($v->term_id == $data['cat']){
-			                        $sHtml .= '<option selected="selected" value="'.$v->term_id.'">'.$v->name.'</option>';
-		                        }else{
-			                        $sHtml .= '<option value="'.$v->term_id.'">'.$v->name.'</option>';
-		                        }
-	                        }
+		                        'show_option_all' => '',
+		                        'taxonomy'        => 'product_cat',
+		                        'selected'        => $data['cat'],
+		                        'hide_empty'      => 0,
+		                        'hierarchical'    => 1,
+                                'name' => 'poka[cat]',
+                                'class' => 'regular-text'
+                            );
+	                        wp_dropdown_categories($args);
                         ?>
-                        <select name="poka[cat]" class="regular-text">
-                            <?php echo $sHtml; ?>
-                        </select>
                     </td>
                 </tr>
                 <tr>

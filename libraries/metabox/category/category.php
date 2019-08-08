@@ -98,10 +98,16 @@
 				);
 			}
 			
+			if(!empty($_POST['medium'])){
+				foreach($_POST['medium'] as $v){
+					$aMedium    = explode('-', $v);
+					update_post_meta($aMedium[0], 'decorate_small', $aMedium[1]);
+				}
+			}
+			
 			$aShowProduct = !empty($_POST['show_product']) ? $_POST['show_product'] : '';
 			$aProduct = !empty($_POST['all_product']) ? $_POST['all_product'] : '';
 			$aProduct = !empty($aProduct) ? explode(',', $aProduct) : '';
-			
 			
 			if(!empty($aProduct)){
 				foreach($aProduct as $v){
@@ -111,10 +117,6 @@
 						delete_post_meta($v, 'show_product');
 					}
 				}
-			}
-			
-			if(isset($_POST['priority'])){
-				$arrData['priority'] = $_POST['priority'];
 			}
 			
 			if(!empty($arrData)){
@@ -128,9 +130,6 @@
 				if($key == "name"){
 					$new['image'] = 'Thumbnail';
 				}
-				if($key == "posts"){
-					$new['priority'] = 'Priority';
-				}
 				$new[ $key ]     = $title;
 			}
 			return $new;
@@ -142,10 +141,6 @@
 				if(!empty($aData)){
 					if($column_name == 'image'){
 						return '<img height="48" width="48" src="'.wp_get_attachment_image_src($aData['image']['id'])[0].'" />';
-					}
-					
-					if($column_name == 'priority'){
-						return '<a target="_blank" href="'.get_permalink($aData['priority']).'">'.get_the_title($aData['priority']).'</a>';
 					}
 				}
 			}

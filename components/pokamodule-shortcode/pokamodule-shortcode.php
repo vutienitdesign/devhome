@@ -80,6 +80,21 @@
 				case "ajax-upload-image":
 					$this->ajaxUploadImage();
 					break;
+				
+				//Get SET DO
+				case "ajax-get-set-tag":
+					$this->ajaxGetSetTag();
+					break;
+				
+				//Get Data Set Do
+				case "ajax-load-set-product":
+					$this->ajaxGetSetProduct();
+					break;
+				
+				//Add product set do
+				case "ajax-add-product-set":
+					$this->ajaxAddProductSet();
+					break;
 					
 				default:
 					die("NOTHING");
@@ -162,6 +177,24 @@
 		private function ajaxUploadImage(){
 			check_ajax_referer('ajax-security-code', 'security');
 			require_once $this->sPath . '/tpl/ajax/upload-image/display.php';
+			die();
+		}
+		
+		private function ajaxGetSetTag(){
+			check_ajax_referer('ajax-security-code', 'security');
+			require_once $this->sPath . '/tpl/ajax/set-do/display.php';
+			die();
+		}
+		
+		private function ajaxGetSetProduct(){
+			check_ajax_referer('ajax-security-code', 'security');
+			require_once $this->sPath . '/tpl/ajax/set-do/load-data.php';
+			die();
+		}
+		
+		private function ajaxAddProductSet(){
+			check_ajax_referer('ajax-security-code', 'security');
+			require_once $this->sPath . '/tpl/ajax/set-do/add-product.php';
 			die();
 		}
 	}

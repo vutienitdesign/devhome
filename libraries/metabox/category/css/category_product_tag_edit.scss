@@ -1,9 +1,22 @@
+#edittag {
+    max-width: 1000px;
+}
+
 .list-product{
     background-color: #ffffff;
     padding: 20px 10px;
 
     th{
         padding: 15px 10px;
+    }
+
+    td{
+        padding-top: 5px;
+        padding-bottom: 5px;
+
+        p{
+            margin-top: 0;
+        }
     }
 
     th,
@@ -14,4 +27,17 @@
     .center{
         text-align: center;
     }
+
+    .stt{
+        width: 5%;
+    }
+
+    .fronend{
+        width: 15%;
+    }
+}
+
+.data-list-product{
+    max-height: 800px;
+    overflow: auto;
 }

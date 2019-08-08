@@ -137,7 +137,7 @@
 			
 			$sHtmlProduct .= '<div class="item '.$sClassActive.'">
 						<div class="image">
-							<a href="" target="_blank"><img src="'.$imageUrl.'" alt="'.$sTitle.'"></a>
+							<a href="'.$sLink.'" target="_blank"><img src="'.$imageUrl.'" alt="'.$sTitle.'"></a>
 						</div>
 						<div class="info">
 							<h4 class="title"><a target="_blank" href="'.$sLink.'">'.$sTitle.'</a></h4>
@@ -150,7 +150,7 @@
 							</ul>
 						</div>
 						<div class="action">
-							<button type="button" value="'.$id.'" data-id="'.$dataProductCurrent.'" class="button alt add-config" data-product="'.$idProductChange.'" data-type="'.$typeProduct.'" data-temp="'.$idProductTemp.'" data-term="'.$termID.'">Thêm vào cấu hình</button>
+							<button type="button" value="'.$id.'" data-id="'.$dataProductCurrent.'" class="button add-config" data-product="'.$idProductChange.'" data-type="'.$typeProduct.'" data-temp="'.$idProductTemp.'" data-term="'.$termID.'">Thêm vào cấu hình</button>
 						</div>
 						<div class="clear"></div>
 					</div>';

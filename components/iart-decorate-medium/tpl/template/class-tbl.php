@@ -105,7 +105,7 @@
 				'name'           => 'Name',
 				'name_show'      => 'Name Show',
 				'max'            => 'Max',
-				'tag'            => 'Tag Woocommerce',
+				'tag'            => 'Tag Woocommerce (SET Đồ)',
 				'decorate_large' => 'Không gian lớn',
 				'decorate_small' => 'Không gian nhỏ',
 			);

@@ -20,6 +20,26 @@
     <th>Sản phẩm</th>
     <td>
 		<?php
+            $idMedium = '';
+			global $wpdb;
+			$sql = "SELECT `id`,`tag` FROM `{$wpdb->prefix}decorate_medium`";
+			$result = $wpdb->get_results($sql, ARRAY_A);
+			if(!empty($result)){
+			    foreach($result as $v){
+				    $aTag    = explode(',', $v['tag']);
+				    if(in_array($term_id, $aTag)){
+					    $idMedium = $v['id'];
+				        break;
+                    }
+                }
+            }
+			
+			$resultMedium = array();
+			if(!empty($idMedium)){
+				$sql = "SELECT `id`,`name` FROM `{$wpdb->prefix}decorate_small` WHERE `decorate_medium` = {$idMedium}";
+				$resultMedium = $wpdb->get_results($sql, ARRAY_A);
+            }
+			
 			$args = array(
 				'post_status' => array('publish'),
 				'post_type' => array('product'),
@@ -37,6 +57,8 @@
 			$sHtml = '';
 			$sProductHidden = '';
 			$the_query = new WP_Query( $args );
+			
+			$i = 0;
 			if($the_query->have_posts() ) :
 				while ( $the_query->have_posts() ) : $the_query->the_post();
 			        $nID = get_the_ID();
@@ -50,27 +72,55 @@
 			        if($sShowProduct == 'no'){
 				        $sCheckedShow = 'checked="checked"';
                     }
+					
+					$medium = get_post_meta($nID, 'decorate_small', true);
+			        $sHtmlMedium = '';
+			        if(!empty($resultMedium)){
+			            $iTmp = 0;
+			            foreach($resultMedium as $v){
+			                $sID = $nID . '-' . $v['id'];
+			                
+			                $sCheckedMedium = '';
+			                if($medium == $v['id']){
+				                $sCheckedMedium = 'checked="checked"';
+                            }
+			                
+				            $sHtmlMedium .= '<p>
+                                                <input '.$sCheckedMedium.' name="medium[medium-'.$i.']" type="radio" value="'.$sID.'" id="'.$sID.'-'.$iTmp.'">
+                                                <label for="'.$sID.'-'.$iTmp.'">'.$v['name'].'</label>
+                                             </p>';
+				            $iTmp++;
+                        }
+                    }
 			        
 					$sHtml .= '<tr>
+                                    <td class="center">'.($i + 1).'</td>
                                     <td>'.get_the_title().'</td>
-                                    <td class="center"><input '.$sChecked.' type="radio" name="priority" value="'.$nID.'"></td>
                                     <td class="center"><input '.$sCheckedShow.' type="checkbox" name="show_product[]" value="'.$nID.'"></td>
+                                    <td class="">
+                                        '.$sHtmlMedium.'
+                                    </td>
                                 </tr>';
 					$sProductHidden .= ',' . $nID;
+					
+					$i++;
 				endwhile;
 			endif;
 			
 			$sProductHidden = ltrim($sProductHidden, ',');
 		?>
 
-        <table class="list-product">
-            <tr>
-                <th>Tên sản phẩm</th>
-                <th class="center">Sản phẩm trung tâm</th>
-                <th class="center">Hiện thị Frontend</th>
-            </tr>
-            <?php echo $sHtml; ?>
-        </table>
+        <div class="data-list-product">
+            <table class="list-product">
+                <tr>
+                    <th class="stt center">STT</th>
+                    <th>Tên sản phẩm</th>
+                    <th class="fronend center">Hiện thị Frontend</th>
+                    <th class="center">Không gian nhỏ</th>
+                </tr>
+		        <?php echo $sHtml; ?>
+            </table>
+        </div>
     </td>
 </tr>
 <input type="hidden" name="all_product" value="<?php echo $sProductHidden; ?>" />

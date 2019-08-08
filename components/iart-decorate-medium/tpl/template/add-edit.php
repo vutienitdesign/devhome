@@ -125,9 +125,25 @@
                     </td>
                 </tr>
                 <tr>
-                    <th>Tags Woocommerce</th>
+                    <th>Tags Woocommerce (SET Đồ)</th>
                     <td class="data-tag">
 	                    <?php
+                            global $wpdb;
+                            $sWhere = '';
+		                    if($vAction == 'edit'){
+			                    $sWhere = "WHERE `id` != {$_GET['article']}";
+		                    }
+                            $sql = "SELECT `tag` FROM `{$wpdb->prefix}decorate_medium` {$sWhere}";
+		                    $result = $wpdb->get_col($sql);
+		                    
+		                    $aTag = array();
+		                    if(!empty($result)){
+		                        foreach($result as $v){
+			                        $v    = explode(',', $v);
+			                        $aTag = array_merge($v, $aTag);
+                                }
+                            }
+                            
 		                    $sIDDesigned = '';
 		                    if(isset($data['tag']) && !empty($data['tag'])){
 			                    $sIDDesigned = $data['tag'];
@@ -145,6 +161,9 @@
 		                    $arrCat = get_categories( $args );
 		                    $sDesigned = '';
 		                    foreach($arrCat as $v){
+		                        if(in_array($v->term_id, $aTag)){
+		                            continue;
+                                }
 			                    $sDesigned .= '<div class="item" data-value="'.$v->term_id.'">'.$v->name.'</div>';
 		                    }
 	                    ?>

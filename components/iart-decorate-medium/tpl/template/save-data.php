@@ -36,6 +36,7 @@
 		exit();
 	}
 	
+	
 	$data = array(
 		'decorate_large' => intval($_POST['poka']['decorate_id']),
 		'name'           => $sName,
@@ -43,7 +44,7 @@
 		'max'            => intval($_POST['poka']['max']),
 		'tag'            => $_POST['tag_woo'],
 	);
-	$format =  array('%d','%s','%s','%s','%d');
+	$format =  array('%d','%s','%s','%d','%s');
 	
 	if($action == 'add'){
 		$wpdb->insert($tbl, $data,$format);

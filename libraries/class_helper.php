@@ -72,6 +72,55 @@
 			return $sHtml;
 		}
 		
+		//Get html set do
+		public function getDataSet3SetDo($idMedium){
+			global $wpdb;
+			
+			$sHtml = '';
+			
+			$sql    = "SELECT `tag` FROM `{$wpdb->prefix}decorate_medium` WHERE `id` = {$idMedium}";
+			$result = $wpdb->get_row($sql, ARRAY_A);
+			
+			$sAllData = '';
+			if(!empty($result)){
+				$aTag = explode(',', $result['tag']);
+				if(!empty($aTag)){
+					foreach($aTag as $v){
+						$sAllData .= ',' . $v;
+					}
+					$sAllData = ltrim($sAllData, ',');
+					
+					foreach($aTag as $v){
+						$aData = get_option("poka_product_tag_" . $v);
+						
+						if(!empty($aData['image']['url'])){
+							$sImage = $aData['image']['url'];
+						}else{
+							$sImage = _POKA_PLUGIN_URL_ . 'images/no-thumbnail.jpg';
+						}
+						
+						$sHtml .= '<div class="item">
+			                            <img src="'.$sImage.'">
+			                            <div class="action-set">
+			                                <button class="btn view-now" data-all="'.$sAllData.'" value="'.$v.'">Xem nhanh</button>
+			                                <button class="btn add-now" data-all="'.$sAllData.'" value="'.$v.'">Thêm vào cấu hình</button>
+			                            </div>
+			                        </div>';
+					}
+				}
+			}
+			
+			
+			if(empty($sHtml)){
+				return '<p>Hiện tại chưa có SET Đồ</p>';
+			}else{
+				$sHtml .= '<div class="action">
+                                    <button class="btn view-all-set" data-all="'.$sAllData.'" value="'.$idMedium.'">Xem tất cả</button>
+                                </div>';
+				return $sHtml;
+			}
+		}
+		
 		//Get data Set 3 cau hinh san pham
 		public function getDataSet3ConfigProduct(){
 			if(!session_id()){
