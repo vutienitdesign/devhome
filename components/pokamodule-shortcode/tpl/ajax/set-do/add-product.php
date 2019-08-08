@@ -1,6 +1,6 @@
 <?php
-	$idProduct = $_POST['product_id']; //Sản phẩm muốn thay đổi
-	$idSmall   = get_post_meta($idProduct, 'decorate_small', true);
+	$idProduct     = $_POST['product_id']; //Sản phẩm muốn thay đổi
+	$idSmall       = get_post_meta($idProduct, 'decorate_small', true);
 	
 	$sHtml = '';
 	if(!empty($idSmall)){
@@ -34,7 +34,7 @@
 						</div>
                     </td>
                     <td>'.wc_price($product->get_price()).'</td>
-                    <td><input type="number" class="input-text soluong custom-data-id" value="1" min="1" data-id="'.$dataID.'" data-product="'.$idProduct.'" data-price="'.$product->get_price().'"></td>
+                    <td><input type="number" class="input-text soluong custom-data-id" value="1" min="1" data-id="'.$dataID.'" data-product="'.$idProduct.'" data-price="'.$product->get_price().'" data-type="set" data-tag="'.$termID.'|'.$dataAll.'"></td>
                     <td class="html-price">'.wc_price($product->get_price()).'</td>
                     <td class="action">
                        <div class="iart-tooltip">
@@ -52,9 +52,9 @@
 	
 	echo json_encode(
 		array(
-			'data' => $sHtml,
-			'dataid' => $idSmall,
+			'data'      => $sHtml,
+			'dataID'    => $idSmall,
 			'idproduct' => $idRandom,
-			'msg' => ''
+			'msg'       => ''
 		)
 	);

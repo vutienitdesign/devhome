@@ -101,7 +101,7 @@
 													</ul>
 												</div>
 					                            <div class="action">
-					                            	<button type="button" value="'.$id.'" class="button add-config" data-type="'.$typeProduct.'" data-id="'.$idSmall.'" data-all="'.$allData.'" data-term="'.$v.'" data-product="'.$idProductChange.'">Thêm vào cấu hình</button>
+					                            	<button type="button" value="'.$id.'" class="button add-config" data-type="'.$typeProduct.'" data-id="'.$idSmall.'" data-all="'.$allData.'" data-term="'.$v.'" data-product-edit="'.$idProductChange.'">Thêm vào cấu hình</button>
 												</div>
 					                        </div></div>';
 						endwhile;
@@ -113,12 +113,11 @@
 				
 				$sHtmlTab .= '<li class="acce_tab '.$sActive.'" data-active="'.$sActive.'" data-tab="'.$allData.'" value="'.$v.'"><a>'.$terms->name.'</a></li>';
 				
-				
 				$i++;
 			}
 		}
 		
-		$sHtmlAll = '<li class="acce_tab_all"><a>Chọn tất cả</a></li>';
+		$sHtmlAll = '<li class="acce_tab_all"><a class="choose-all-set">Chọn tất cả</a></li>';
 		if(empty($sHtmlProduct)){
 			$sHtmlProduct = '<p>Không có sản phẩm</p>';
 			$sHtmlAll     = '';

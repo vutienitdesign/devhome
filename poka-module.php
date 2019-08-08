@@ -49,6 +49,7 @@ class POKA_Plugin{
 			'POKA_Custom_Table'   => 'class_table.php',
 			'POKA_Extension'      => 'class_extension.php',
 			'POKA_TinyMCE'        => 'class_tinymce.php',
+			'POKA_Myaccount_Woo'  => 'class_myaccount_woo.php',
 		);
 		
 		foreach($aCoreClass as $key => $value){

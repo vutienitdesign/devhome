@@ -21,14 +21,16 @@
     <td>
 		<?php
             $idMedium = '';
+            $idLarge = '';
 			global $wpdb;
-			$sql = "SELECT `id`,`tag` FROM `{$wpdb->prefix}decorate_medium`";
+			$sql = "SELECT `id`,`decorate_large`,`tag` FROM `{$wpdb->prefix}decorate_medium`";
 			$result = $wpdb->get_results($sql, ARRAY_A);
 			if(!empty($result)){
 			    foreach($result as $v){
 				    $aTag    = explode(',', $v['tag']);
 				    if(in_array($term_id, $aTag)){
 					    $idMedium = $v['id'];
+					    $idLarge = $v['decorate_large'];
 				        break;
                     }
                 }
@@ -36,7 +38,7 @@
 			
 			$resultMedium = array();
 			if(!empty($idMedium)){
-				$sql = "SELECT `id`,`name` FROM `{$wpdb->prefix}decorate_small` WHERE `decorate_medium` = {$idMedium}";
+				$sql = "SELECT `id`,`name` FROM `{$wpdb->prefix}decorate_small` WHERE `decorate_medium` = {$idMedium} AND `decorate_large` = {$idLarge}";
 				$resultMedium = $wpdb->get_results($sql, ARRAY_A);
             }
 			
@@ -53,7 +55,6 @@
 					),
 				),
 			);
-			$productPriority = isset($aData['priority']) ? $aData['priority'] : '';
 			$sHtml = '';
 			$sProductHidden = '';
 			$the_query = new WP_Query( $args );
@@ -62,10 +63,6 @@
 			if($the_query->have_posts() ) :
 				while ( $the_query->have_posts() ) : $the_query->the_post();
 			        $nID = get_the_ID();
-			        $sChecked = '';
-			        if($productPriority == $nID){
-				        $sChecked = 'checked="checked"';
-                    }
 					
 					$sCheckedShow = '';
 					$sShowProduct = get_post_meta($nID, 'show_product', 'no');

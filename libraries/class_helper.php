@@ -24,14 +24,10 @@
 		}
 		
 		//Lay thong tin san pham tai session
-		public function getProductSession($idProduct = '', $dataID = '', $dataTerm = '', $quantity){
+		public function getProductSession($idProduct = '', $dataID = '', $dataTerm = '', $quantity, $option = array()){
 			$sHtml = '';
 			
 			$product = wc_get_product($idProduct);
-			
-			$sTitle   = $product->get_title();
-			$imageUrl = wp_get_attachment_image_src(get_post_thumbnail_id($idProduct))[0];
-			$idRandom = PMCommon::generateRandomString('5');
 			
 			if(!empty($product)){
 				$stock = $product->get_stock_status();
@@ -41,7 +37,38 @@
 					$stock = 'Hết hàng';
 				}
 				
-				$sHtml = '<tr data-id="'.$dataID.'" data-product="'.$idProduct.'" class="data-product product-id-'.$idProduct.' product-temp-'.$idRandom.'">
+				$sTitle   = $product->get_title();
+				$imageUrl = wp_get_attachment_image_src(get_post_thumbnail_id($idProduct))[0];
+				$idRandom = PMCommon::generateRandomString('5');
+				
+				if($option['type_product'] == 'set'){
+					$sHtml = '<tr data-id="'.$dataID.'" data-product="'.$idProduct.'" class="data-product product-id-'.$idProduct.' product-temp-'.$idRandom.'" data-type="set">
+							    <td><img class="img-product" src="'.$imageUrl.'" alt="'.$sTitle.'"></td>
+							    <td>
+							        <a href="'.$product->get_permalink().'" target="_blank">'.$sTitle.'</a>
+							        <div class="info">
+							            <ul>
+	                                        <li><span>Mã sản phẩm:</span> '.$product->get_sku().'</li>
+	                                        <li><span>Kho hàng:</span> '.$stock.'</li>
+	                                    </ul>
+							        </div>
+							    </td>
+							    <td>'.wc_price($product->get_price()).'</td>
+							    <td><input type="number" class="input-text soluong custom-data-id" value="'.$quantity.'" min="1" data-id="'.$dataID.'" data-product="'.$idProduct.'" data-price="'.$product->get_price().'" data-type="set" data-tag="'.$option['term'].'|'.$option['all_term'].'"></td>
+							    <td class="html-price">'.wc_price($product->get_price() * $quantity).'</td>
+							    <td class="action">
+							        <div class="iart-tooltip">
+							            <i class="fa fa-edit edit-product-set custom-data-id" data-id="'.$dataID.'" data-temp="'.$idRandom.'" data-product="'.$idProduct.'" data-small="'.$option['small'].'" data-all="'.$option['all_term'].'" data-term="'.$option['term'].'"></i>
+							            <span class="tooltiptext">Sửa</span>
+							        </div>
+							        <div class="iart-tooltip">
+							            <i class="fa fa-trash remove-product custom-data-id" data-id="'.$dataID.'" data-product="'.$idProduct.'"></i>
+							            <span class="tooltiptext">Xóa</span>
+							        </div>
+							    </td>
+							</tr>';
+				}else{
+					$sHtml = '<tr data-id="'.$dataID.'" data-product="'.$idProduct.'" class="data-product product-id-'.$idProduct.' product-temp-'.$idRandom.'">
                             <td><img class="img-product" src="'.$imageUrl.'" alt="'.$sTitle.'"></td>
                             <td>
                                 <a href="'.$product->get_permalink().'" target="_blank">'.$sTitle.'</a>
@@ -66,7 +93,7 @@
                                </div>
                             </td>
                         </tr>';
-				
+				}
 			}
 			
 			return $sHtml;

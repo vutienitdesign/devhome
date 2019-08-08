@@ -11,11 +11,13 @@
 				session_start();
 			}
 			
+			$idTemp = 'iart_' . uniqid();
 			$_SESSION['iart_config_product'] = array(
-				'step1' => $id
+				'id_temp' => $idTemp,
+				'step1'   => $id,
 			);
 			
-			$sql = "SELECT `id`, `name_show`, `max` FROM `{$wpdb->prefix}decorate_medium` WHERE `decorate_large` = {$id}";
+			$sql = "SELECT `id`, `name`, `name_show`, `max` FROM `{$wpdb->prefix}decorate_medium` WHERE `decorate_large` = {$id}";
 			$result = $wpdb->get_results($sql);
 			
 			if(!empty($result)){
@@ -27,15 +29,15 @@
 						<div class="modal-body">
 							<div class="loader"></div>
 							<h3 class="title">Cấu hình chi tiết</h3>
-							<div class="choose">
-							';
+							<div class="choose">';
 				
 				$arrStep = array();
 				$i = 0;
 				foreach($result as $v){
 					$arrStep[$i] = array(
-						'id' => $v->id,
-						'value' => 1
+						'id'    => $v->id,
+						'value' => 1,
+						'name'  => $v->name
 					);
 					$sHtml .= '<div class="item"><label class="lbl">'.$v->name_show.'</label><input type="number" class="input-text config-amount" value="1" data-id="'.$v->id.'" min="1" max="'.$v->max.'"></div>';
 					
@@ -55,6 +57,21 @@
 					'data' => $sHtml,
 					'log' => 'success'
 				);
+				
+				//Save To database
+				$arrSave = $_SESSION['iart_config_product'];
+				unset($arrSave['id_temp']);
+				
+				global $wpdb;
+				$tbl = $wpdb->prefix . 'manager_builder_product';
+				$data = array(
+					'id_temp' => $idTemp,
+					'user_id' => get_current_user_id(),
+					'data'    => serialize($arrSave),
+					'date'    => _REAL_TIME_,
+				);
+				$format =  array('%s','%d','%s','%d');
+				$wpdb->insert($tbl, $data,$format);
 			}else{
 				$arrResult = array(
 					'data' => 'Không gian không có sẵn',
