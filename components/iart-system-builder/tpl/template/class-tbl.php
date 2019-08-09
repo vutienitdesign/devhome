@@ -54,6 +54,17 @@
 			//===========Start Where + Search=========
 			$whereArr = array();
 			
+			if(isset($_REQUEST['date-min']) && !empty($_REQUEST['date-min'])){
+				$timestamp = strtotime($_REQUEST['date-min']);
+				$whereArr[] = " (`date` >= '{$timestamp}') ";
+			}
+			
+			if(isset($_REQUEST['date-max']) && !empty($_REQUEST['date-max'])){
+				$timestamp = strtotime($_REQUEST['date-max']);
+				$timestamp += 86399;
+				$whereArr[] = " (`date` <= '{$timestamp}') ";
+			}
+			
 			if(isset($_REQUEST['s']) && !empty($_REQUEST['s'])){
 				$s = sanitize_text_field($_REQUEST['s']);
 				$whereArr[] = " (`name` LIKE '%{$s}%') ";
@@ -99,7 +110,7 @@
 		
 		public function get_columns(){
 			$arr = array(
-				'cb'          => '<input type="checkbox" />',
+//				'cb'          => '<input type="checkbox" />',
 				'id'          => 'ID',
 				'user_id'     => 'User',
 				'data'        => 'Thông tin',
@@ -112,7 +123,7 @@
 		
 		public function get_bulk_actions(){
 			$actions = array(
-				'delete'   => 'Delete',
+//				'delete'   => 'Delete',
 			);
 			return $actions;
 		}
@@ -159,7 +170,7 @@
 			
 			$actions = array(
 				'edit'     => '<a href="'.$urlView.'">Xem cấu hình</a>',
-				'delete'   => '<a onclick="return confirm(\'Bạn có chắc chắn muốn xóa?\');" href="'.$linkDelete.'">Xóa</a>',
+//				'delete'   => '<a onclick="return confirm(\'Bạn có chắc chắn muốn xóa?\');" href="'.$linkDelete.'">Xóa</a>',
 			);
 			
 			$userData = get_userdata($item['user_id']);
@@ -171,7 +182,23 @@
 		
 		protected function extra_tablenav($which){
 			if($which == 'top'){
-			
+				echo '<div class="alignleft actions bulkactions">';
+				
+				$sDate = '';
+				if(isset($_REQUEST['date-min']) && !empty($_REQUEST['date-min'])){
+					$sDate = $_REQUEST['date-min'];
+				}
+				echo 'Thời gian Min <input name="date-min" type="date" value="'.$sDate.'" class="regular-text">';
+				
+				$sDate = '';
+				if(isset($_REQUEST['date-max']) && !empty($_REQUEST['date-max'])){
+					$sDate = $_REQUEST['date-max'];
+				}
+				echo ' Thời gian Max <input name="date-max" type="date" value="'.$sDate.'" class="regular-text">';
+				
+				
+				echo '<input name="submit" class="button" value="Tìm kiếm" type="submit">';
+				echo '</div>';
 			}
 		}
 		

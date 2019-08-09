@@ -170,8 +170,8 @@
 			</tbody>
 		</table>
 		
-		<p class="submit">
+		<!--<p class="submit">
 			<input name="submit" id="submit" class="button button-primary" value="Lưu lại" type="submit">
-		</p>
+		</p>-->
 	</form>
 </div>
