@@ -80,6 +80,11 @@
 					'doAction'
 				));
 				
+				add_submenu_page('iart-asia', 'Xây dựng sản phẩm', 'Xây dựng sản phẩm', 'manage_options', 'iart-system-builder', array(
+					'POKA_Controller',
+					'doAction'
+				));
+				
 				add_submenu_page('iart-asia', 'Settings', 'Settings', 'manage_options', 'iart-settings', array(
 					'POKA_Controller',
 					'doAction'

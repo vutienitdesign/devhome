@@ -117,7 +117,7 @@
 			}
 		}
 		
-		$sHtmlAll = '<li class="acce_tab_all"><a class="choose-all-set">Chọn tất cả</a></li>';
+		$sHtmlAll = '<li class="acce_tab_all"><a class="choose-all-set" data-term="'.$term_id.'" data-all="'.$allData.'">Chọn tất cả</a></li>';
 		if(empty($sHtmlProduct)){
 			$sHtmlProduct = '<p>Không có sản phẩm</p>';
 			$sHtmlAll     = '';

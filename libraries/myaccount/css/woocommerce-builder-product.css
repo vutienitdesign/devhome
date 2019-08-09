@@ -1,3 +1,16 @@
-
+.pagination .page-numbers {
+  background-color: #fed700;
+  padding: 5px 10px;
+  color: #FFF;
+  font-weight: bold;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px; }
+  .pagination .page-numbers:hover {
+    background-color: #000;
+    color: #ffffff; }
+.pagination .current {
+  background-color: #000;
+  color: #ffffff; }
 
 /*# sourceMappingURL=woocommerce-builder-product.css.map */

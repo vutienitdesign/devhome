@@ -69,8 +69,9 @@
 					'user_id' => get_current_user_id(),
 					'data'    => serialize($arrSave),
 					'date'    => _REAL_TIME_,
+					'date_update'    => _REAL_TIME_,
 				);
-				$format =  array('%s','%d','%s','%d');
+				$format =  array('%s','%d','%s','%d','%d');
 				$wpdb->insert($tbl, $data,$format);
 			}else{
 				$arrResult = array(
@@ -92,7 +93,7 @@
 		}
 		
 		if(!empty($_POST['data']) && is_array($_POST['data'])){
-			$arr = $_SESSION['iart_config_product']['step2'];
+			$arr    = $_SESSION['iart_config_product']['step2'];
 			$arrNew = $_SESSION['iart_config_product']['step2'];
 			
 			foreach($arr as $k => $v){

@@ -8,7 +8,7 @@
 		$termID = $_POST['term_id'];
 		
 		$product   = wc_get_product($idProduct);
-		$dataID          = $_POST['data_id'];
+		$dataID    = $_POST['data_id'];
 		
 		$sTitle   = $product->get_title();
 		$imageUrl = wp_get_attachment_image_src(get_post_thumbnail_id($idProduct))[0];

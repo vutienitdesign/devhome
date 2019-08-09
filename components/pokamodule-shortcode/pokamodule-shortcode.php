@@ -95,6 +95,16 @@
 				case "ajax-add-product-set":
 					$this->ajaxAddProductSet();
 					break;
+				
+				//Add product set do
+				case "ajax-all-set-product":
+					$this->ajaxAddSetProductSet();
+					break;
+				
+				//Get All Data Set Do
+				case "ajax-load-all-set-product":
+					$this->ajaxGetAllSetProduct();
+					break;
 					
 				default:
 					die("NOTHING");
@@ -195,6 +205,18 @@
 		private function ajaxAddProductSet(){
 			check_ajax_referer('ajax-security-code', 'security');
 			require_once $this->sPath . '/tpl/ajax/set-do/add-product.php';
+			die();
+		}
+		
+		private function ajaxAddSetProductSet(){
+			check_ajax_referer('ajax-security-code', 'security');
+			require_once $this->sPath . '/tpl/ajax/set-do/add-all-product-set.php';
+			die();
+		}
+		
+		private function ajaxGetAllSetProduct(){
+			check_ajax_referer('ajax-security-code', 'security');
+			require_once $this->sPath . '/tpl/ajax/set-do/load-all-data.php';
 			die();
 		}
 	}

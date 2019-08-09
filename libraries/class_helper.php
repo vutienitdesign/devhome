@@ -142,7 +142,7 @@
 				return '<p>Hiện tại chưa có SET Đồ</p>';
 			}else{
 				$sHtml .= '<div class="action">
-                                    <button class="btn view-all-set" data-all="'.$sAllData.'" value="'.$idMedium.'">Xem tất cả</button>
+                                    <button class="btn view-all-set" data-all="'.$sAllData.'">Xem tất cả</button>
                                 </div>';
 				return $sHtml;
 			}

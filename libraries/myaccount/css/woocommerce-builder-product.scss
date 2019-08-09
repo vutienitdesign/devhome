@@ -1,0 +1,21 @@
+.pagination{
+    .page-numbers{
+        background-color: #fed700;
+        padding: 5px 10px;
+        color: #FFF;
+        font-weight: bold;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+
+        &:hover{
+            background-color: #000;
+            color: #ffffff;
+        }
+    }
+
+    .current{
+        background-color: #000;
+        color: #ffffff;
+    }
+}

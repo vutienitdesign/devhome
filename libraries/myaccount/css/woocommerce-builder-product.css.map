@@ -1,7 +1,7 @@
 {
 "version": 3,
-"mappings": "",
-"sources": [],
+"mappings": "AACI,yBAAa;EACT,gBAAgB,EAAE,OAAO;EACzB,OAAO,EAAE,QAAQ;EACjB,KAAK,EAAE,IAAI;EACX,WAAW,EAAE,IAAI;EACjB,qBAAqB,EAAE,GAAG;EAC1B,kBAAkB,EAAE,GAAG;EACvB,aAAa,EAAE,GAAG;EAElB,+BAAO;IACH,gBAAgB,EAAE,IAAI;IACtB,KAAK,EAAE,OAAO;AAItB,oBAAQ;EACJ,gBAAgB,EAAE,IAAI;EACtB,KAAK,EAAE,OAAO",
+"sources": ["woocommerce-builder-product.scss"],
 "names": [],
 "file": "woocommerce-builder-product.css"
 }

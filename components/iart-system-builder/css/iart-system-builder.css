@@ -1,0 +1,71 @@
+#id {
+  width: 5%; }
+
+.wp-list-table .quick-edit {
+  background-color: #dfdfdf !important; }
+  .wp-list-table .quick-edit .msg p {
+    font-size: 14px;
+    color: red;
+    background-color: #fff;
+    padding: 5px 10px;
+    font-weight: bold;
+    border: 1px solid red; }
+.wp-list-table .tbl-loadding {
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  padding: 15px 0;
+  color: #0073aa;
+  background-color: #dfdfdf; }
+  .wp-list-table .tbl-loadding span {
+    position: relative;
+    width: 27px;
+    height: 15px;
+    display: inline-block; }
+    .wp-list-table .tbl-loadding span:before {
+      top: 0px;
+      left: 0;
+      position: absolute;
+      content: "\f463";
+      color: #0073aa;
+      margin-right: 5px;
+      font: normal 20px/1 'dashicons'; }
+.wp-list-table .btn-clone {
+  margin-right: 10px; }
+.wp-list-table .inline-edit-legend {
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+  margin-top: 15px;
+  font-weight: 500;
+  width: 100%; }
+.wp-list-table .inline-edit-save {
+  display: inline-block;
+  width: 100%;
+  margin: 0; }
+.wp-list-table .poka-row .item {
+  margin-bottom: 10px; }
+  .wp-list-table .poka-row .item:last-child {
+    margin-bottom: 0; }
+.wp-list-table .poka-row .title {
+  display: block;
+  font-size: 13px;
+  font-style: italic; }
+.wp-list-table .poka-row .data {
+  display: block; }
+  .wp-list-table .poka-row .data input {
+    border: 1px solid #dfdfdf;
+    width: 100%;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px; }
+    .wp-list-table .poka-row .data input:focus {
+      border: 1px solid #dfdfdf; }
+.wp-list-table .poka-row.left {
+  width: 40%;
+  display: inline-block; }
+.wp-list-table .clear {
+  clear: bottom; }
+
+/*# sourceMappingURL=iart-system-builder.css.map */

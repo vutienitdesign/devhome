@@ -26,9 +26,10 @@
 			global $wp_query;
 			$is_endpoint = isset($wp_query->query_vars[ self::$endpoint ]);
 			if($is_endpoint && !is_admin() && is_main_query() && in_the_loop() && is_account_page()){
-				return $this->_sTitle;
+				$title = $this->_sTitle;
+				
+				remove_filter('the_title', array($this, 'endpoint_title' ) );
 			}
-			
 			return $title;
 		}
 		
@@ -47,6 +48,6 @@
 		}
 		public function endpoint_content(){
 			wp_enqueue_style("poka_myaccount_css_builder_product", _POKA_PLUGIN_LIB_URL_ . "myaccount/css/woocommerce-builder-product.min.css");
-			require_once _POKA_PLUGIN_LIB_PATH_ . "myaccount/woocommerce-builder-product.php";
+			require _POKA_PLUGIN_LIB_PATH_ . "myaccount/woocommerce-builder-product.php";
 		}
 	}
