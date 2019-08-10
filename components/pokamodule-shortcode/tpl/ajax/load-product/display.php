@@ -194,8 +194,10 @@
 		$sHtmlPagi .= '</ul>';
 	}
 	
-	
-	$sHtmlSort = '';
+	//=========== START HTML SORT ================
+	$sHtmlSort = '<div class="sort-data">
+					<span>Sắp xếp: </span>
+					<select class="sort-product">';
 	$aSort = array(
 		'date-desc'  => 'Sắp xếp thời gian từ mới đến cũ',
 		'date'       => 'Sắp xếp theo thời gian từ cũ đến mới',
@@ -209,8 +211,10 @@
 			$sHtmlSort .= '<option value="'.$k.'">'.$v.'</option>';
 		}
 	}
+	$sHtmlSort = $sHtmlSort . '</select></div>';
+	//=========== END HTML SORT ================
 	
-	$sHtmlAttr = '';
+	$sHtmlAttr = '<div class="box-left">';
 	if(!empty($aDataSearch)){
 		foreach($aDataSearch as $k => $v){
 			$sHtmlAttr .= '
@@ -234,29 +238,20 @@
 						</div>';
 		}
 	}
+	$sHtmlAttr .= '</div>';
 	
-	$sHtml = '<div class="modal-content box-choose-product">
-				<div class="modal-header">
-					<h2 class="title">Chọn sản phẩm</h2>
-					<div class="box-close"><span class="close">&times;</span></div>
-					<div class="search-name">
-						<input type="text" class="value-text" placeholder="Nhập tên sản phẩm..." value="'.$nameProduct.'">
-						<button type="submit" class="btn btn-search"><i class="ec ec-search"></i></button>
-					</div>
-				</div>
-				<div class="modal-body">
-					<div class="loader"></div>
-					<div class="box-left">
-						'.$sHtmlAttr.'
-					</div>
-					<div class="box-right">
+	$sHtmlData = '';
+	if(empty($sHtmlProduct)){
+		$sHtmlSort = '';
+		$sHtmlAttr = '';
+		
+		$sHtmlData   = '<p>Không có sản phẩm!</p>';
+		$sHtmlSearch = '';
+		$sTitle      = 'Thông báo';
+	}else{
+		$sHtmlData = '<div class="box-right">
 						<div class="box-action">
-							<div class="sort-data">
-								<span>Sắp xếp: </span>
-								<select class="sort-product">
-									'.$sHtmlSort.'
-								</select>
-							</div>
+							'.$sHtmlSort.'
 							<div class="pagi">
 								'.$sHtmlPagi.'
 							</div>
@@ -265,7 +260,24 @@
 						<div class="list-product-select">
 							'.$sHtmlProduct.'
 						</div>
-					</div>
+					</div>';
+		
+		$sTitle = 'Chọn sản phẩm';
+		$sHtmlSearch = '<div class="search-name">
+						<input type="text" class="value-text" placeholder="Nhập tên sản phẩm..." value="'.$nameProduct.'">
+						<button type="submit" class="btn btn-search"><i class="ec ec-search"></i></button>
+					</div>';
+	}
+	
+	$sHtml = '<div class="modal-content box-choose-product">
+				<div class="modal-header">
+					<h2 class="title">'.$sTitle.'</h2>
+					<div class="box-close"><span class="close">&times;</span></div>
+					'.$sHtmlSearch.'
+				</div>
+				<div class="modal-body">
+					'.$sHtmlAttr.'
+					'.$sHtmlData.'
 					<div class="clear"></div>
 				</div>
 			</div>';

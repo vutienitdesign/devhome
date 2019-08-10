@@ -1,9 +1,8 @@
 <?php
 	global $wpdb, $pokaSession;
-	$tbl = $wpdb->prefix . 'decorate_medium';
+	$tbl = $wpdb->prefix . 'decorate_small';
 	
 	$article_id = @$_REQUEST['article'];
-	
 	if(!is_array($_REQUEST['article'])){
 		$name   = 'security_code';
 		$action = 'delete_id_' . $_GET['article'];
@@ -15,7 +14,7 @@
 			$wpdb->delete($tbl, $where,$where_format);
 		}
 	}else{
-		$ids = join(',', $_REQUEST['article']);
+		$ids = join(',', $article_id);
 		$sql = 'DELETE FROM ' . $tbl . ' WHERE id IN ('. $ids . ')';
 		$wpdb->query($sql);
 	}

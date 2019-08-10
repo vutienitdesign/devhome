@@ -10,8 +10,9 @@
   width: 120px; }
 
 .title-large {
-  font-weight: bold;
   font-size: 16px; }
+  .title-large span {
+    font-weight: bold; }
 
 .title-medium {
   font-weight: bold;

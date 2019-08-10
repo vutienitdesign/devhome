@@ -1,9 +1,7 @@
 <?php
 	global $wpdb, $pokaSession;
 	$sPrefix = $wpdb->prefix;
-	$tbl = $sPrefix . 'decorate_large';
-	$tblMedium = $sPrefix . 'decorate_medium';
-	$tblSmall = $sPrefix . 'decorate_small';
+	$tbl     = $sPrefix . 'manager_builder_product';
 	
 	$article_id = @$_REQUEST['article'];
 	
@@ -16,32 +14,16 @@
 			$where 			= array('id' => $article_id);
 			$where_format 	= array('%d');
 			$wpdb->delete($tbl, $where,$where_format);
-			
-			//Xoa Table decorate_medium
-			$where 			= array('decorate_large' => $article_id);
-			$wpdb->delete($tblMedium, $where,$where_format);
-			
-			//Xoa Table decorate_small
-			$where 			= array('decorate_large' => $article_id);
-			$wpdb->delete($tblSmall, $where,$where_format);
 		}
 	}else{
 		$ids = join(',', $_REQUEST['article']);
 		$sql = 'DELETE FROM ' . $tbl . ' WHERE id IN ('. $ids . ')';
 		$wpdb->query($sql);
-		
-		//Xoa decorate_medium
-		$sql = 'DELETE FROM ' . $tblMedium . ' WHERE `decorate_large` IN ('. $ids . ')';
-		$wpdb->query($sql);
-		
-		//Xoa decorate_small
-		$sql = 'DELETE FROM ' . $tblSmall . ' WHERE `decorate_large` IN ('. $ids . ')';
-		$wpdb->query($sql);
 	}
 	
 	$pokaSession->set('msg', array(
 		'type' => 'success',
-		'msg'  => 'Delete success!',
+		'msg'  => 'Xóa bỏ thành công!',
 	));
 	
 	$url = 'admin.php?page=' . $_REQUEST['page'];

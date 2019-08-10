@@ -110,7 +110,7 @@
 		
 		public function get_columns(){
 			$arr = array(
-//				'cb'          => '<input type="checkbox" />',
+				'cb'          => '<input type="checkbox" />',
 				'id'          => 'ID',
 				'user_id'     => 'User',
 				'data'        => 'Thông tin',
@@ -123,7 +123,7 @@
 		
 		public function get_bulk_actions(){
 			$actions = array(
-//				'delete'   => 'Delete',
+				'delete'   => 'Xóa',
 			);
 			return $actions;
 		}
@@ -170,7 +170,7 @@
 			
 			$actions = array(
 				'edit'     => '<a href="'.$urlView.'">Xem cấu hình</a>',
-//				'delete'   => '<a onclick="return confirm(\'Bạn có chắc chắn muốn xóa?\');" href="'.$linkDelete.'">Xóa</a>',
+				'delete'   => '<a onclick="return confirm(\'Bạn có chắc chắn muốn xóa?\');" href="'.$linkDelete.'">Xóa</a>',
 			);
 			
 			$userData = get_userdata($item['user_id']);

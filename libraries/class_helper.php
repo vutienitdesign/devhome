@@ -117,8 +117,13 @@
 					}
 					$sAllData = ltrim($sAllData, ',');
 					
+					$i = 1;
 					foreach($aTag as $v){
 						$aData = get_option("poka_product_tag_" . $v);
+						
+						if($i > 3){
+							break;
+						}
 						
 						if(!empty($aData['image']['url'])){
 							$sImage = $aData['image']['url'];
@@ -126,13 +131,21 @@
 							$sImage = _POKA_PLUGIN_URL_ . 'images/no-thumbnail.jpg';
 						}
 						
+						$terms = get_term_by('id', $v, 'product_tag' );
+						$sTitleTag = '';
+						if(!empty($terms)){
+							$sTitleTag = '<h3 class="title-tag">' . $terms->name . '</h3>';
+						}
 						$sHtml .= '<div class="item">
+										'.$sTitleTag.'
 			                            <img src="'.$sImage.'">
 			                            <div class="action-set">
 			                                <button class="btn view-now" data-all="'.$sAllData.'" value="'.$v.'">Xem nhanh</button>
 			                                <button class="btn add-now" data-all="'.$sAllData.'" value="'.$v.'">Thêm vào cấu hình</button>
 			                            </div>
 			                        </div>';
+						
+						$i++;
 					}
 				}
 			}

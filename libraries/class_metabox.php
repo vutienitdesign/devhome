@@ -7,7 +7,7 @@ class POKA_Custom_MetaBox {
 				'post_page' => false,        //Meta boxes POST, Page
 				'category'  => true,        //taxonomy: category, product_cat, attributes product...
 				'user'      => false,         //Meta boxes User Profile
-				'product'   => true,         //Meta boxes Product Woocommerce
+				'product'   => false,         //Meta boxes Product Woocommerce
 				'comment'   => false,        //Meta boxes Comment
 			);
 			

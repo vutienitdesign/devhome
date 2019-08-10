@@ -26,7 +26,7 @@
 		exit();
 	}
 	
-	if(empty($_POST['tag_woo'])){
+	/*if(empty($_POST['tag_woo'])){
 		$pokaSession->set('msg', array(
 			'type' => 'error',
 			'msg'  => 'Vui lòng lựa chọn Tags Woocommerce!',
@@ -34,7 +34,7 @@
 		
 		wp_redirect($urlRedirect);
 		exit();
-	}
+	}*/
 	
 	
 	$data = array(

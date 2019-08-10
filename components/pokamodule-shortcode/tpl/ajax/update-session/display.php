@@ -6,6 +6,7 @@
 	global $woocommerce;
 	
 	$setCart = (isset($_POST['cart']) && $_POST['cart'] == 'cart') ? 'cart' : '';
+	//Add to cart
 	if($setCart == 'cart'){
 		//Update To Cart
 		$arrSave = array();
@@ -72,30 +73,22 @@
 				}
 				
 				if(isset($v['custom-info'])){
-					$aTmp = explode(' ::: ', $v['custom-info']);
+					$aTmp  = explode(' ::: ', $v['custom-info']);
 					$aTmp1 = explode(' -- ', $aTmp[1]);
 					
-					$arrCustom = array(
-						'info' => '',
-						'url' => '',
-					);
 					if(!empty($aTmp1)){
-						foreach($aTmp1 as $vCustom){
-							$aData = explode(' :: ', $vCustom);
-							if(!empty($aData)){
-								if($aData[0] == 'info'){
-									$arrCustom['info'] = $aData[1];
-								}
-								
-								if($aData[0] == 'url'){
-									$arrCustom['url'] = $aData[1];
-								}
-							}
-						}
+						$arrCustom = array(
+							'info'   => explode(' :: ', $aTmp1[0])[1],
+							'url'    => explode(' :: ', $aTmp1[1])[1],
+							'image'  => explode(' :: ', $aTmp1[2])[1],
+							'idtemp' => explode(' :: ', $aTmp1[3])[1],
+						);
+						$arrSave[$aTmp[0]][] = $arrCustom;
+						
+						echo "<pre style='color: red;font-size: 14px'>";
+							print_r($aTmp1);
+						echo "</pre>";
 					}
-					$arrSave[$aTmp[0]]['custom-info']['info'] = $arrCustom['info'];
-					$arrSave[$aTmp[0]]['custom-info']['url'] = $arrCustom['url'];
-					$arrSave[$aTmp[0]]['custom-info']['image'] = '';
 				}
 			}
 			
@@ -120,6 +113,14 @@
 						}
 					}
 				}
+				
+				foreach($_SESSION['iart_config_product']['step3'][$tabcrrent] as $k => $v){
+					if($k == 'custom-info'){
+						continue;
+					}
+					
+					$_SESSION['iart_config_product']['step3'][$tabcrrent][$k] = array();
+				}
 			}else{
 				if(!empty($arrSave)){
 					foreach($arrSave as $k => $v){
@@ -129,9 +130,9 @@
 						}
 					}
 				}
+				
+				$_SESSION['iart_config_product']['step3'] = $arrSave;
 			}
-			
-			$_SESSION['iart_config_product']['step3'] = $arrSave;
 		}
 		
 		//Update Database
@@ -142,11 +143,9 @@
 		$idTemp  = $arrSave['id_temp'];
 		unset($arrSave['id_temp']);
 		
-		
-		
 		$data = array(
-			'data'    => serialize($arrSave),
-			'date_update'    => _REAL_TIME_,
+			'data'          => serialize($arrSave),
+			'date_update'   => _REAL_TIME_,
 		);
 		$format =  array('%s','%d');
 		

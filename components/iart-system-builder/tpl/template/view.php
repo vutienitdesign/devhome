@@ -92,6 +92,10 @@
                                                         </tr>';
 			
 			                            $sHtmlTr = '';
+			                            /*echo "<pre style='color: red;font-size: 14px'>";
+			                            	print_r($v);
+			                            echo "</pre>";*/
+			                            
 		                                foreach($v as $kPhong => $vPhong){
 		                                    if(!empty($vPhong)){
 		                                        $nTotalProduct = count($vPhong);
@@ -156,9 +160,20 @@
 			                            $sHtml .= $sHtmlTr . '</table></div>';
                                     }
                                 }
+		
+		
+		                        $sHtmlMedium = '';
+		                        if(!empty($aData['step3-config'])){
+			                        foreach($aData['step3-config'] as $v){
+				                        $sHtmlMedium .= ', ' . $v['config']['name'];
+			                        }
+			                        $sHtmlMedium = ltrim($sHtmlMedium, ', ');
+			                        $sHtmlMedium = '<h3 class="title-large"><span>Không gian vừa:</span> '.$sHtmlMedium.'</h3>';
+                                }
 	                        }
                         ?>
-                        <h3 class="title-large">Không gian lớn: <?php echo $nameLarge; ?></h3>
+                        <h3 class="title-large"><span>Không gian lớn:</span> <?php echo $nameLarge; ?></h3>
+                        <?php echo $sHtmlMedium; ?>
                         <div class="data">
                             <?php
                                 echo $sHtml;

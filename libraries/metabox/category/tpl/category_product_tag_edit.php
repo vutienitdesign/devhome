@@ -63,13 +63,7 @@
 			if($the_query->have_posts() ) :
 				while ( $the_query->have_posts() ) : $the_query->the_post();
 			        $nID = get_the_ID();
-					
-					$sCheckedShow = '';
-					$sShowProduct = get_post_meta($nID, 'show_product', 'no');
-			        if($sShowProduct == 'no'){
-				        $sCheckedShow = 'checked="checked"';
-                    }
-					
+			        
 					$medium = get_post_meta($nID, 'decorate_small', true);
 			        $sHtmlMedium = '';
 			        if(!empty($resultMedium)){
@@ -93,7 +87,6 @@
 					$sHtml .= '<tr>
                                     <td class="center">'.($i + 1).'</td>
                                     <td>'.get_the_title().'</td>
-                                    <td class="center"><input '.$sCheckedShow.' type="checkbox" name="show_product[]" value="'.$nID.'"></td>
                                     <td class="">
                                         '.$sHtmlMedium.'
                                     </td>
@@ -112,7 +105,6 @@
                 <tr>
                     <th class="stt center">STT</th>
                     <th>Tên sản phẩm</th>
-                    <th class="fronend center">Hiện thị Frontend</th>
                     <th class="center">Không gian nhỏ</th>
                 </tr>
 		        <?php echo $sHtml; ?>

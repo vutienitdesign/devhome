@@ -1,7 +1,7 @@
 <?php
 	global $wpdb, $pokaSession;
-	$sPrefix = $wpdb->prefix;
-	$tbl = $sPrefix . 'decorate_medium';
+	$sPrefix  = $wpdb->prefix;
+	$tbl      = $sPrefix . 'decorate_medium';
 	$tblSmall = $sPrefix . 'decorate_small';
 	
 	$article_id = @$_REQUEST['article'];

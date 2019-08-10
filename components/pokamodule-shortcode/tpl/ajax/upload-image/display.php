@@ -8,16 +8,25 @@
 				session_start();
 			}
 			
-			$nTabContent  = $_POST['tab-content'];
-			
-			//Xoa bo anh cu
-			$imageRemove = $_SESSION['iart_config_product']['step3']['tab-content-' . $nTabContent]['custom-info']['image'];
-			if(!empty($imageRemove)){
-				$folderPath = _POKA_PLUGIN_PATH_ . 'images/builder-product/' . get_current_user_id() . '/' . $imageRemove;
-				@unlink($folderPath);
+			$nTabContent  = $_POST['dataID'];
+			if(!empty($_SESSION['iart_config_product']['step3'])){
+				foreach($_SESSION['iart_config_product']['step3'] as $v){
+					foreach($v as $aImage){
+						if($aImage['idtemp'] == $nTabContent){
+							if(!empty($aImage['image'])){
+								$folderPath = _POKA_PLUGIN_PATH_ . 'images/builder-product/' . get_current_user_id() . '/' . $aImage['image'];
+								@unlink($folderPath);
+							}
+							break;
+						}
+					}
+				}
 			}
-			
-			//Cap nhat anh moi
-			$_SESSION['iart_config_product']['step3']['tab-content-' . $nTabContent]['custom-info']['image'] = $fileName;
 		}
 	}
+	
+	echo json_encode(
+		array(
+			'data' => $fileName,
+		)
+	);

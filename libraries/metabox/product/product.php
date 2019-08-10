@@ -29,11 +29,7 @@ class POKA_MetaBox_Product {
 		$postType = get_post_type($postID);
 		
 		if($postType == 'product'){
-			if(isset($_POST['show_product']) && $_POST['show_product'] == 'no'){
-				update_post_meta($postID, 'show_product', 'no');
-			}else{
-				delete_post_meta($postID, 'show_product');
-			}
+		
 		}
 	}
 	

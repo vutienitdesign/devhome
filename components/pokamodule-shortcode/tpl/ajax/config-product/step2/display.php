@@ -43,6 +43,7 @@
 					
 					$i++;
 				}
+				
 				$_SESSION['iart_config_product']['step2'] = $arrStep;
 				$_SESSION['iart_config_product']['step3'] = array();
 				

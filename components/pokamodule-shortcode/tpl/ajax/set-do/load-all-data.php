@@ -84,7 +84,7 @@
 													</ul>
 												</div>
 					                            <div class="action">
-					                            	<button type="button" value="'.$id.'" class="button add-config" data-type="'.$typeProduct.'" data-id="'.$idSmall.'" data-all="'.$allData.'" data-term="'.$v.'" data-product-edit="'.$idProductChange.'">Thêm vào cấu hình</button>
+					                            	<button type="button" value="'.$id.'" class="button add-config" data-type="'.$typeProduct.'" data-id="'.$idSmall.'" data-all="'.$dataTerm.'" data-term="'.$term_id.'" data-product-edit="'.$idProductChange.'">Thêm vào cấu hình</button>
 												</div>
 					                        </div></div>';
 					endwhile;

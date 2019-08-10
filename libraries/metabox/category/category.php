@@ -105,20 +105,6 @@
 				}
 			}
 			
-			$aShowProduct = !empty($_POST['show_product']) ? $_POST['show_product'] : '';
-			$aProduct = !empty($_POST['all_product']) ? $_POST['all_product'] : '';
-			$aProduct = !empty($aProduct) ? explode(',', $aProduct) : '';
-			
-			if(!empty($aProduct)){
-				foreach($aProduct as $v){
-					if(in_array($v, $aShowProduct)){
-						update_post_meta($v, 'show_product', 'no');
-					}else{
-						delete_post_meta($v, 'show_product');
-					}
-				}
-			}
-			
 			if(!empty($arrData)){
 				update_option("poka_product_tag_" . $term_id, $arrData);
 			}

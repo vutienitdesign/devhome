@@ -14,9 +14,13 @@
 }
 
 .title-large{
-    font-weight: bold;
     font-size: 16px;
+
+    span{
+        font-weight: bold;
+    }
 }
+
 
 .title-medium{
     font-weight: bold;
