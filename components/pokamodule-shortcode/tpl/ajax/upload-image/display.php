@@ -1,4 +1,5 @@
 <?php
+	$msg = '';
 	if(!empty($_POST['data'])){
 		global $pokaHelper;
 		$fileName = $pokaHelper->saveImage($_POST['data']);
@@ -11,13 +12,16 @@
 			$nTabContent  = $_POST['dataID'];
 			if(!empty($_SESSION['iart_config_product']['step3'])){
 				foreach($_SESSION['iart_config_product']['step3'] as $v){
-					foreach($v as $aImage){
-						if($aImage['idtemp'] == $nTabContent){
-							if(!empty($aImage['image'])){
-								$folderPath = _POKA_PLUGIN_PATH_ . 'images/builder-product/' . get_current_user_id() . '/' . $aImage['image'];
-								@unlink($folderPath);
+					if(!empty($v['custom-info'])){
+						foreach($v['custom-info'] as $aImage){
+							if($aImage['idtemp'] == $nTabContent){
+								if(!empty($aImage['image'])){
+									$folderPath = _POKA_PLUGIN_PATH_ . 'images/builder-product/' . get_current_user_id() . '/' . $aImage['image'];
+									@unlink($folderPath);
+									$msg = $folderPath;
+								}
+								break;
 							}
-							break;
 						}
 					}
 				}
@@ -28,5 +32,6 @@
 	echo json_encode(
 		array(
 			'data' => $fileName,
+			'msg' => $msg,
 		)
 	);

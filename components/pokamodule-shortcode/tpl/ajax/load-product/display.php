@@ -122,13 +122,6 @@
 
 			$product = wc_get_product($id);
 			
-			$stock = $product->get_stock_status();
-			if($stock == 'instock'){
-				$stock = 'Còn hàng';
-			}else{
-				$stock = 'Hết hàng';
-			}
-			
 			$sClassActive = '';
 			if(in_array($id, $aProductExit)){
 				$sClassActive = 'activate-choose';
@@ -143,7 +136,6 @@
 							<h4 class="title"><a target="_blank" href="'.$sLink.'">'.$sTitle.'</a></h4>
 							<ul>
 								<li><span class="lbl">Mã sản phẩm:</span>'.$product->get_sku().'</li>
-								<li><span class="lbl">Kho hàng:</span>'.$stock.'</li>
 								<li>
 									<div class="price">'.$product->get_price_html().'</div>
 								</li>

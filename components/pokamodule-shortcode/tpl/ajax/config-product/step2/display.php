@@ -13,8 +13,9 @@
 			
 			$idTemp = 'iart_' . uniqid();
 			$_SESSION['iart_config_product'] = array(
-				'id_temp' => $idTemp,
-				'step1'   => $id,
+				'id_temp'      => $idTemp,
+				'name_product' => '',
+				'step1'        => $id,
 			);
 			
 			$sql = "SELECT `id`, `name`, `name_show`, `max` FROM `{$wpdb->prefix}decorate_medium` WHERE `decorate_large` = {$id}";
@@ -27,9 +28,11 @@
 							<h2 class="title">Thông tin cấu hình</h2>
 						</div>
 						<div class="modal-body">
-							<div class="loader"></div>
-							<h3 class="title">Cấu hình chi tiết</h3>
-							<div class="choose">';
+							<div class="choose">
+							<div class="item item-project">
+								<label class="lbl">Tên dự án:</label>
+								<input type="text" class="name-project" value="" placeholder="Tên dự án...">
+							</div>';
 				
 				$arrStep = array();
 				$i = 0;
@@ -93,6 +96,9 @@
 			session_start();
 		}
 		
+		$sNameProduct = $_POST['name-product'];
+		$_SESSION['iart_config_product']['name_product'] = $sNameProduct;
+		
 		if(!empty($_POST['data']) && is_array($_POST['data'])){
 			$arr    = $_SESSION['iart_config_product']['step2'];
 			$arrNew = $_SESSION['iart_config_product']['step2'];
@@ -110,6 +116,25 @@
 			'data' => '',
 			'log' => 'success'
 		);
+		
+		//Update Database
+		global $wpdb;
+		$tbl = $wpdb->prefix . 'manager_builder_product';
+		
+		$arrSave = $_SESSION['iart_config_product'];
+		$idTemp  = $arrSave['id_temp'];
+		unset($arrSave['id_temp']);
+		
+		$data = array(
+			'name'          => $sNameProduct,
+			'data'          => serialize($arrSave),
+			'date_update'   => _REAL_TIME_,
+		);
+		$format =  array('%s','%s','%d');
+		
+		$where = array('id_temp'=> $idTemp);
+		$where_format = array('%s');
+		$wpdb->update($tbl, $data, $where,$format,$where_format);
 	}
 	
 	echo json_encode($arrResult);

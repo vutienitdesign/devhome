@@ -29,12 +29,6 @@
 					$dataID   = $idSmall;
 					$imageUrl = wp_get_attachment_image_src(get_post_thumbnail_id($idProduct))[0];
 					$idRandom = PMCommon::generateRandomString('5');
-					$stock    = $product->get_stock_status();
-					if($stock == 'instock'){
-						$stock = 'Còn hàng';
-					}else{
-						$stock = 'Hết hàng';
-					}
 					
 					$sHtml = '<tr data-id="'.$dataID.'" data-product="'.$idProduct.'" class="data-product product-id-'.$idProduct.' product-temp-'.$idRandom.'" data-type="set">
 			                    <td><img class="img-product" src="'.$imageUrl.'" alt="'.$sTitle.'"></td>
@@ -43,7 +37,6 @@
 			                        <div class="info">
 			                            <ul>
 			                                <li><span>Mã sản phẩm:</span> '.$product->get_sku().'</li>
-			                                <li><span>Kho hàng:</span> '.$stock.'</li>
 										</ul>
 									</div>
 			                    </td>

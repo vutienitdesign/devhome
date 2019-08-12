@@ -36,13 +36,15 @@
 			}
 		}
 	}else{
+		$userID = get_current_user_id();
 		if($_POST['refresh'] == 'all'){
 			if(!empty($_SESSION['iart_config_product']['step3'])){
 				foreach($_SESSION['iart_config_product']['step3'] as $v){
-					$imageRemove = $v['custom-info']['image'];
-					if(!empty($imageRemove)){
-						$folderPath = _POKA_PLUGIN_PATH_ . 'images/builder-product/' . get_current_user_id() . '/' . $imageRemove;
-						@unlink($folderPath);
+					foreach($v['custom-info'] as $vInfo){
+						if(!empty($vInfo['image'])){
+							$folderPath = _POKA_PLUGIN_PATH_ . 'images/builder-product/' . $userID . '/' . $vInfo['image'];
+							@unlink($folderPath);
+						}
 					}
 				}
 			}
@@ -83,11 +85,7 @@
 							'image'  => explode(' :: ', $aTmp1[2])[1],
 							'idtemp' => explode(' :: ', $aTmp1[3])[1],
 						);
-						$arrSave[$aTmp[0]][] = $arrCustom;
-						
-						echo "<pre style='color: red;font-size: 14px'>";
-							print_r($aTmp1);
-						echo "</pre>";
+						$arrSave[$aTmp[0]]['custom-info'][] = $arrCustom;
 					}
 				}
 			}
@@ -97,23 +95,33 @@
 				//Xóa bỏ hình ảnh
 				$tabcrrent = $_POST['tabcrrent'];
 				
-				$imageRemove = $_SESSION['iart_config_product']['step3'][$tabcrrent]['custom-info']['image'];
-				if(!empty($imageRemove)){
-					$folderPath = _POKA_PLUGIN_PATH_ . 'images/builder-product/' . get_current_user_id() . '/' . $imageRemove;
-					@unlink($folderPath);
-				}
-				
-				foreach($arrSave as $k => $v){
-					if($k == $tabcrrent){
-						$arrSave[$k]['custom-info']['image'] = '';
-					}else{
-						$sImage = $_SESSION['iart_config_product']['step3'][$k]['custom-info']['image'];
-						if(!empty($sImage)){
-							$arrSave[$k]['custom-info']['image'] = $sImage;
-						}
+				//Remove Image
+				$aCustomInfo = $_SESSION['iart_config_product']['step3'][$tabcrrent]['custom-info'];
+				foreach($aCustomInfo as $v){
+					if(!empty($v['image'])){
+						$folderPath = _POKA_PLUGIN_PATH_ . 'images/builder-product/' . $userID . '/' . $v['image'];
+						@unlink($folderPath);
 					}
 				}
 				
+				//Set Empty Custom Info
+				if(!empty($arrSave[$tabcrrent]['custom-info'])){
+					$i = 0;
+					foreach($arrSave[$tabcrrent]['custom-info'] as $v){
+						if($i == 0){
+							$arrCustom = array();
+							$arrCustom['info'] = '';
+							$arrCustom['url'] = '';
+							$arrCustom['image'] = '';
+							$arrCustom['idtemp'] = $v['idtemp'];
+							
+							$arrSave[$tabcrrent]['custom-info'] = array();
+							$arrSave[$tabcrrent]['custom-info'][0] = $arrCustom;
+							break;
+						}
+						$i++;
+					}
+				}
 				foreach($_SESSION['iart_config_product']['step3'][$tabcrrent] as $k => $v){
 					if($k == 'custom-info'){
 						continue;

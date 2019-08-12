@@ -72,13 +72,6 @@
 							
 							$product = wc_get_product($id);
 							
-							$stock = $product->get_stock_status();
-							if($stock == 'instock'){
-								$stock = 'Còn hàng';
-							}else{
-								$stock = 'Hết hàng';
-							}
-							
 							$idSmall = get_post_meta($id, 'decorate_small', true);
 							
 							$sClassActive = '';
@@ -94,7 +87,6 @@
 													<h4 class="title"><a target="_blank" href="'.$sLink.'">'.$sTitle.'</a></h4>
 													<ul>
 														<li><span class="lbl">Mã sản phẩm: </span>'.$product->get_sku().'</li>
-														<li><span class="lbl">Kho hàng: </span>'.$stock.'</li>
 														<li>
 															<div class="price">'.$product->get_price_html().'</div>
 														</li>
@@ -117,7 +109,7 @@
 			}
 		}
 		
-		$sHtmlAll = '<li class="acce_tab_all"><a class="choose-all-set" data-term="'.$term_id.'" data-all="'.$allData.'">Chọn tất cả</a></li>';
+		$sHtmlAll = '<li class="acce_tab_all"><a class="button choose-all-set" data-term="'.$term_id.'" data-all="'.$allData.'">Chọn tất cả</a></li>';
 		if(empty($sHtmlProduct)){
 			$sHtmlProduct = '<p>Không có sản phẩm</p>';
 			$sHtmlAll     = '';

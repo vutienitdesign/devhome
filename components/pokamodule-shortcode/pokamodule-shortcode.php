@@ -106,6 +106,11 @@
 					$this->ajaxGetAllSetProduct();
 					break;
 					
+				//Remove Custom info
+				case "ajax-remove-custom-info":
+					$this->ajaxRemoveCustomInfo();
+					break;
+					
 				default:
 					die("NOTHING");
 					break;
@@ -217,6 +222,12 @@
 		private function ajaxGetAllSetProduct(){
 			check_ajax_referer('ajax-security-code', 'security');
 			require_once $this->sPath . '/tpl/ajax/set-do/load-all-data.php';
+			die();
+		}
+		
+		private function ajaxRemoveCustomInfo(){
+			check_ajax_referer('ajax-security-code', 'security');
+			require_once $this->sPath . '/tpl/ajax/update-session/delete.php';
 			die();
 		}
 	}

@@ -1,6 +1,8 @@
+$colorVang: #fed700;
+
 .pagination{
     .page-numbers{
-        background-color: #fed700;
+        background-color: $colorVang;
         padding: 5px 10px;
         color: #FFF;
         font-weight: bold;
@@ -17,5 +19,29 @@
     .current{
         background-color: #000;
         color: #ffffff;
+    }
+}
+
+td.action{
+    .button{
+        background-color: $colorVang;
+        color: #000;
+        background-color: #fed700;
+        color: #000;
+        padding: 5px 15px;
+        font-size: 14px;
+
+        .fa{
+            font-size: 12px;
+        }
+
+        &:hover{
+            background-color: #000;
+            color: #FFFFFF;
+        }
+    }
+
+    .restore-remove-builder{
+        margin-right: 5px;
     }
 }

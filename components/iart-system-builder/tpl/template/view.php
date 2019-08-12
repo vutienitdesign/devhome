@@ -105,13 +105,6 @@
 		                                            if(!empty($vProduct)){
 			                                            $product         = wc_get_product($vProduct['id']);
 			                                            if(!empty($product)){
-				                                            $stock = $product->get_stock_status();
-				                                            if($stock == 'instock'){
-					                                            $stock = 'Còn hàng';
-				                                            }else{
-					                                            $stock = 'Hết hàng';
-				                                            }
-				                                            
 				                                            $imageUrl = wp_get_attachment_image_src(get_post_thumbnail_id($vProduct['id']))[0];
 				                                           
 				                                            if($i == 0){
@@ -127,7 +120,6 @@
                                                                         <div class="info">
                                                                                 <ul>
                                                                                     <li><span>Mã sản phẩm:</span> '.$product->get_sku().'</li>
-                                                                                    <li><span>Kho hàng:</span> '.$stock.'</li>
                                                                                 </ul>
                                                                             </div>
                                                                         </td>

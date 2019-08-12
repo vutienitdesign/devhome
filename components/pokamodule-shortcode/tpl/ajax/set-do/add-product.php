@@ -15,13 +15,6 @@
 		$idRandom = PMCommon::generateRandomString('5');
 		
 		if(!empty($product)){
-			$stock = $product->get_stock_status();
-			if($stock == 'instock'){
-				$stock = 'Còn hàng';
-			}else{
-				$stock = 'Hết hàng';
-			}
-			
 			$sHtml = '<tr data-id="'.$dataID.'" data-product="'.$idProduct.'" class="data-product product-id-'.$idProduct.' product-temp-'.$idRandom.'" data-type="set">
                     <td><img class="img-product" src="'.$imageUrl.'" alt="'.$sTitle.'"></td>
                     <td>
@@ -29,7 +22,6 @@
                     	<div class="info">
                     		<ul>
                     			<li><span>Mã sản phẩm:</span> '.$product->get_sku().'</li>
-                    			<li><span>Kho hàng:</span> '.$stock.'</li>
 							</ul>
 						</div>
                     </td>

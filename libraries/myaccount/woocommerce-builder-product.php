@@ -1,12 +1,12 @@
 <?php
-    global $wpdb;
+    global $wpdb, $pokaSession;
     $tbl = $wpdb->prefix . 'manager_builder_product';
 	
 	global $wp_query;
 	
 	$userID = get_current_user_id();
 	
-	$sql    = "SELECT * FROM `{$tbl}` WHERE `user_id` = {$userID} ORDER BY `id` DESC";
+	$sql    = "SELECT * FROM `{$tbl}` WHERE `user_id` = {$userID} AND `status` = 1 ORDER BY `id` DESC";
 	
 	$nTotal = $wpdb->query($sql);
 	
@@ -16,10 +16,56 @@
 	$sql          .= ' LIMIT ' . $itemsPerPage . ' OFFSET ' . $offset;
 	
 	$result = $wpdb->get_results($sql, ARRAY_A);
+	
+	if(isset($_GET['remove']) && $_GET['remove'] > 0){
+		$urlRedrect = get_permalink() . 'builder-product/';
+		if (!isset($_GET['builder_product']) || !wp_verify_nonce($_GET['builder_product'], 'builder_product_none')) {
+		}else{
+            $sql = "SELECT `id` FROM `{$tbl}` WHERE `user_id` = {$userID} AND `id` = {$_GET['remove']}";
+			$resultCheck = $wpdb->get_row($sql);
+			if(!empty($resultCheck)){
+				$data = array(
+					'status' => 2,
+				);
+				$format =  array('%d');
+				
+				$where = array('id'=> $_GET['remove']);
+				$where_format = array('%d');
+				$wpdb->update($tbl, $data, $where,$format,$where_format);
+				
+				$pokaSession->set('msg', array(
+					'type' => 'success',
+					'msg'  => 'Xóa bỏ thành công!',
+				));
+            }
+        }
+		
+		wp_redirect($urlRedrect);
+		exit();
+    }
 ?>
 
 <?php
-    if(!empty($result)){
+	
+	$getMsg = $pokaSession->get('msg');
+	if(!empty($getMsg)){
+		$pokaSession->delete('msg');
+        ?>
+        <script type="text/javascript">
+            jQuery(document).ready(function($){
+                $.alert({
+                    title: 'Thông báo!',
+                    content: '<?php echo $getMsg['msg']; ?>',
+                    type: 'orange',
+                    typeAnimated: true,
+                });
+            });
+        </script>
+        <?php
+	}
+	
+	
+	if(!empty($result)){
 	    $sHtml = '';
 	    
 	    $i = 1;
@@ -38,14 +84,19 @@
             }
             
             $sLink = get_permalink(5196) . '?type=choose-product&restore=' . $v['id'];
-            $sRestore = '<a href="'.$sLink.'"><i class="fa fa-undo"></i> Xây dựng tiếp</a>';
+            $sRestore = '<a href="'.$sLink.'" class="button restore-remove-builder"><i class="fa fa-undo"></i> Xem dự án</a>';
+	
+	        $sLink = get_permalink() . 'builder-product/?remove=' . $v['id'];
+	        $sLink = wp_nonce_url($sLink, 'builder_product_none', 'builder_product');
+            $sDelete = '<a href="'.$sLink.'" class="button remove-builder"  onclick="return confirm(\'Bạn có chắc chắn muốn xóa?\');"><i class="fa fa-trash"></i> Xóa</a>';
 	        $sHtml .= '<tr>
                         <td>'.$i.'</td>
                         <td>'.$v['id'].'</td>
+                        <td>'.$v['name'].'</td>
                         <td>'.$sHtmlData.'</td>
                         <td>'.date('d/m/Y h:i:s', $v['date']).'</td>
                         <td>'.date('d/m/Y h:i:s', $v['date_update']).'</td>
-                        <td>'.$sRestore.'</td>
+                        <td class="action">'.$sRestore.$sDelete.'</td>
                     </tr>';
 	        $i++;
         }
@@ -55,6 +106,7 @@
                 <tr>
                     <th>STT</th>
                     <th>ID</th>
+                    <th>Tên dự án</th>
                     <th>Không gian</th>
                     <th>Ngày tạo</th>
                     <th>Ngày sửa</th>

@@ -17,9 +17,11 @@
 						`id` bigint(20) NOT NULL AUTO_INCREMENT,
 						`id_temp` 	text,
 						`user_id` 	int(11),
+						`name` 	varchar(255),
 						`data` 	longtext,
 						`date` 	int(11),
 						`date_update` 	int(11),
+						`status` 	int(11),
 						PRIMARY KEY (id)
 				) DEFAULT CHARACTER SET = 'utf8' DEFAULT COLLATE 'utf8_general_ci';";
 				
