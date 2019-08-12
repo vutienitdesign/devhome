@@ -99,6 +99,7 @@
 			return array(
 				'id'          => array('id', false),
 				'user_id'     => array('user_id', false),
+				'name'     => array('name', false),
 				'date'        => array('date', false),
 				'date_update' => array('date_update', false),
 			);
@@ -113,6 +114,7 @@
 				'cb'          => '<input type="checkbox" />',
 				'id'          => 'ID',
 				'user_id'     => 'User',
+				'name'     => 'Tên dự án',
 				'data'        => 'Thông tin',
 				'date'        => 'Ngày tạo',
 				'date_update' => 'Ngày sửa',

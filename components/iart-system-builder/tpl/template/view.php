@@ -49,6 +49,7 @@
         <?php
 	        $userID   = $data['user_id'];
 	        $userData = get_userdata($userID);
+	        $urlImage = _POKA_PLUGIN_URL_ . 'images/builder-product/' . $userID . '/';
         ?>
 		<table class="form-table poka-form-table">
 			<tbody>
@@ -92,27 +93,25 @@
                                                         </tr>';
 			
 			                            $sHtmlTr = '';
-			                            /*echo "<pre style='color: red;font-size: 14px'>";
-			                            	print_r($v);
-			                            echo "</pre>";*/
-			                            
+			                            $sHtmlCustom = '';
 		                                foreach($v as $kPhong => $vPhong){
-		                                    if(!empty($vPhong)){
-		                                        $nTotalProduct = count($vPhong);
-		                                        
-		                                        $i = 0;
-		                                        foreach($vPhong as $vProduct){
-		                                            if(!empty($vProduct)){
-			                                            $product         = wc_get_product($vProduct['id']);
-			                                            if(!empty($product)){
-				                                            $imageUrl = wp_get_attachment_image_src(get_post_thumbnail_id($vProduct['id']))[0];
-				                                           
-				                                            if($i == 0){
-				                                                $sHtmlTD = '<td class="name-small" rowspan="'.$nTotalProduct.'">'.$aData['step3-config'][$k]['data'][$kPhong]['name'].'</td>';
-                                                            }else{
-					                                            $sHtmlTD = '';
-                                                            }
-				                                            $sHtmlTr .= '<tr>
+		                                    if($kPhong != 'custom-info'){
+			                                    if(!empty($vPhong)){
+				                                    $nTotalProduct = count($vPhong);
+				
+				                                    $i = 0;
+				                                    foreach($vPhong as $vProduct){
+					                                    if(!empty($vProduct)){
+						                                    $product         = wc_get_product($vProduct['id']);
+						                                    if(!empty($product)){
+							                                    $imageUrl = wp_get_attachment_image_src(get_post_thumbnail_id($vProduct['id']))[0];
+							
+							                                    if($i == 0){
+								                                    $sHtmlTD = '<td class="name-small" rowspan="'.$nTotalProduct.'">'.$aData['step3-config'][$k]['data'][$kPhong]['name'].'</td>';
+							                                    }else{
+								                                    $sHtmlTD = '';
+							                                    }
+							                                    $sHtmlTr .= '<tr>
                                                                         '.$sHtmlTD.'
                                                                         <td><img class="image-product" src="'.$imageUrl.'" /></td>
                                                                         <td class="product">
@@ -126,30 +125,36 @@
                                                                         <td>'.wc_price($product->get_price()).'</td>
                                                                         <td>'.$vProduct['quantity'].'</td>
                                                                     </tr>';
-			                                            }
+						                                    }
+						
+						                                    $i++;
+					                                    }
+				                                    }
+			                                    }
+                                            }
 			
-			                                            $i++;
+			                                if($kPhong == 'custom-info'){
+			                                    foreach($vPhong as $vCustomInfo){
+			                                        if(!empty($vCustomInfo['info']) || !empty($vCustomInfo['url']) || !empty($vCustomInfo['image'])){
+				                                        $sHtmlCustom .= '<div class="item-custom">
+                                                                            <p><span>Tên sản phẩm:</span> '.$vCustomInfo['info'].'</p>
+                                                                            <p><span>Đường dẫn sản phẩm:</span> '.$vCustomInfo['url'].'</p>
+                                                                            <p><span>Hình ảnh sản phẩm:</span> <a href="'.$urlImage . $vCustomInfo['image'].'" target="_blank"><img class="image" src="'.$urlImage . $vCustomInfo['image'].'"></a></p>
+                                                                        </div>';
                                                     }
                                                 }
-                                            }
+			                                }
                                         }
-			
-			                            $sHtmlTr .= '<tr>
-                                                        <td>Sản phẩm mở rộng</td>
-                                                        <td colspan="4" class="custom-product">
-                                                            <div class="item-custom">
-                                                                <p><span>Tên sản phẩm:</span> aaa</p>
-                                                                <p><span>Đường dẫn sản phẩm:</span> bbb</p>
-                                                                <p><span>Hình ảnh sản phẩm:</span> ccc</p>
-                                                            </div>
-                                                            <div class="item-custom">
-                                                                <p><span>Tên sản phẩm:</span> aaa</p>
-                                                                <p><span>Đường dẫn sản phẩm:</span> bbb</p>
-                                                                <p><span>Hình ảnh sản phẩm:</span> ccc</p>
-                                                            </div>
-                                                        </td>
-                                                    </tr>';
-			                            $sHtml .= $sHtmlTr . '</table></div>';
+		                                
+		                                if(!empty($sHtmlCustom)){
+			                                $sHtmlCustom = '<tr>
+                                                                <td rowspan="2">Sản phẩm mở rộng</td>
+                                                                <td colspan="4" class="custom-product">'.$sHtmlCustom.'</td>
+                                                            </tr>';
+                                        }
+		                                
+			                           
+			                            $sHtml .= $sHtmlTr . $sHtmlCustom . '</table></div>';
                                     }
                                 }
 		
@@ -164,6 +169,7 @@
                                 }
 	                        }
                         ?>
+                        <h3 class="title-large"><span>Tên dự án:</span> <?php echo $data['name']; ?></h3>
                         <h3 class="title-large"><span>Không gian lớn:</span> <?php echo $nameLarge; ?></h3>
                         <?php echo $sHtmlMedium; ?>
                         <div class="data">

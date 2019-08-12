@@ -69,6 +69,8 @@ td.custom-product .item-custom {
     width: 150px;
     display: inline-block;
     font-weight: bold; }
+  td.custom-product .item-custom .image {
+    width: 100px; }
 
 .info-product .data-item {
   border: 1px solid red;

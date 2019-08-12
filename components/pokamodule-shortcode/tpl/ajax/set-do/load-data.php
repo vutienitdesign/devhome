@@ -24,13 +24,6 @@
 	
 	$term_id = intval($_POST['term_id']); //ID Tags Term Active
 	if($term_id > 0){
-		$sHtml = '<div class="modal-content box-set-product-vew">
-		            <div class="modal-header">
-		                <span class="close">×</span>
-		                <h3 class="title">Set đồ</h3>
-		            </div>
-		            <div class="modal-body">';
-		
 		$allData = $_POST['all_data'];
 		
 		$aData = $allData;
@@ -38,6 +31,7 @@
 			$aData = explode(',', $aData);
 		}
 		
+		$sTitleTag       = '';
 		$sHtmlTab     = '';
 		$sHtmlProduct = '';
 		
@@ -46,6 +40,7 @@
 			$terms = get_term_by('id', $v, 'product_tag' );
 			if(!empty($terms)){
 				if($term_id == $v){
+					$sTitleTag = $terms->name;
 					$sActive = 'active';
 					
 					$args = array(
@@ -114,6 +109,13 @@
 			$sHtmlProduct = '<p>Không có sản phẩm</p>';
 			$sHtmlAll     = '';
 		}
+		
+		$sHtml = '<div class="modal-content box-set-product-vew">
+		            <div class="modal-header">
+		                <span class="close">×</span>
+		                <h3 class="title">'.$sTitleTag.'</h3>
+		            </div>
+		            <div class="modal-body">';
 		
 		$sHtml .= '<ul class="ec-tabs">
 	                    '.$sHtmlTab.'

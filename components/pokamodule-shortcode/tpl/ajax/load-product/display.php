@@ -12,18 +12,22 @@
 	/*================================SATRT Get Search Attributes================*/
 	$aDataSearch = array();
 	$terms = get_term_by('id', $termID, 'product_cat');
-	$sSlug = $terms->slug;
 	
-	$args = array('category'  => array($sSlug));
-	foreach( wc_get_products($args) as $product ){
-		foreach( $product->get_attributes() as $attr_name => $attr ){
-			$attrLabel =  wc_attribute_label($attr_name);
-			foreach( $attr->get_terms() as $term ){
-				$aDataSearch[$attrLabel][$term->slug] = array(
-					'slug' => $term->slug,
-					'name' => $term->name,
-					'taxonomy' => $attr_name,
-				);
+	$sTitleCat = $_POST['title'];
+	if(!empty($terms)){
+		$sSlug     = $terms->slug;
+		
+		$args = array('category'  => array($sSlug));
+		foreach( wc_get_products($args) as $product ){
+			foreach( $product->get_attributes() as $attr_name => $attr ){
+				$attrLabel =  wc_attribute_label($attr_name);
+				foreach( $attr->get_terms() as $term ){
+					$aDataSearch[$attrLabel][$term->slug] = array(
+						'slug' => $term->slug,
+						'name' => $term->name,
+						'taxonomy' => $attr_name,
+					);
+				}
 			}
 		}
 	}
@@ -115,11 +119,11 @@
 	$sHtmlProduct = '';
 	if ( $the_query->have_posts() ) :
 		while ( $the_query->have_posts() ) : $the_query->the_post();
-			$id = get_the_ID();
-			$sTitle = get_the_title();
-			$sLink = get_permalink();
+			$id       = get_the_ID();
+			$sTitle   = get_the_title();
+			$sLink    = get_permalink();
 			$imageUrl = wp_get_attachment_image_src(get_post_thumbnail_id($id))[0];
-
+			
 			$product = wc_get_product($id);
 			
 			$sClassActive = '';
@@ -254,7 +258,12 @@
 						</div>
 					</div>';
 		
-		$sTitle = 'Chọn sản phẩm';
+		if(empty($sTitleCat)){
+			$sTitle = 'Chọn sản phẩm';
+		}else{
+			$sTitle = 'Chọn ' . $sTitleCat;
+		}
+		
 		$sHtmlSearch = '<div class="search-name">
 						<input type="text" class="value-text" placeholder="Nhập tên sản phẩm..." value="'.$nameProduct.'">
 						<button type="submit" class="btn btn-search"><i class="ec ec-search"></i></button>
