@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AACI,iBAAO;EACH,OAAO,EAAE,IAAI",
+"sources": ["single-style-set.scss"],
+"names": [],
+"file": "single-style-set.css"
+}

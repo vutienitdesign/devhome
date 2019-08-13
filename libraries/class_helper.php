@@ -31,12 +31,13 @@
 			
 			if(!empty($product)){
 				$sTitle   = $product->get_title();
-				$imageUrl = wp_get_attachment_image_src(get_post_thumbnail_id($idProduct))[0];
+				$imageUrl = wp_get_attachment_image_src(get_post_thumbnail_id($idProduct));
+				$imageUrl = $imageUrl[0];
 				$idRandom = PMCommon::generateRandomString('5');
 				
 				if($option['type_product'] == 'set'){
 					$sHtml = '<tr data-id="'.$dataID.'" data-product="'.$idProduct.'" class="data-product product-id-'.$idProduct.' product-temp-'.$idRandom.'" data-type="set">
-							    <td><img class="img-product" src="'.$imageUrl.'" alt="'.$sTitle.'"></td>
+							    <td class="image"><img class="img-product" src="'.$imageUrl.'" alt="'.$sTitle.'"></td>
 							    <td>
 							        <a href="'.$product->get_permalink().'" target="_blank">'.$sTitle.'</a>
 							        <div class="info">
@@ -61,7 +62,7 @@
 							</tr>';
 				}else{
 					$sHtml = '<tr data-id="'.$dataID.'" data-product="'.$idProduct.'" class="data-product product-id-'.$idProduct.' product-temp-'.$idRandom.'">
-                            <td><img class="img-product" src="'.$imageUrl.'" alt="'.$sTitle.'"></td>
+                            <td class="image"><img class="img-product" src="'.$imageUrl.'" alt="'.$sTitle.'"></td>
                             <td>
                                 <a href="'.$product->get_permalink().'" target="_blank">'.$sTitle.'</a>
                                 <div class="info">
@@ -91,7 +92,7 @@
 		}
 		
 		//Get html set do
-		public function getDataSet3SetDo($idMedium){
+		public function getDataSet3SetDo($idMedium, $termPriority = ''){
 			global $wpdb;
 			
 			$sHtml = '';
@@ -99,7 +100,13 @@
 			$sql    = "SELECT `tag` FROM `{$wpdb->prefix}decorate_medium` WHERE `id` = {$idMedium}";
 			$result = $wpdb->get_row($sql, ARRAY_A);
 			
-			$sAllData = '';
+			$postChecked = '';
+			if(!empty($termPriority)){
+				$postChecked = get_option("iart_priority_set_tag_" . $termPriority);
+			}
+			
+			$sAllData   = '';
+			$sHtmlFirst = ''; //Uu tien chon SET
 			if(!empty($result)){
 				$aTag = explode(',', $result['tag']);
 				if(!empty($aTag)){
@@ -109,7 +116,13 @@
 					$sAllData = ltrim($sAllData, ',');
 					
 					$i = 1;
+					$flag = false;
 					foreach($aTag as $v){
+						$postSet = get_option("iart_priority_set_tag_" . $v);
+						if(!empty($postSet) && $postChecked == $postSet){
+							$flag = true;
+						}
+						
 						$aData = get_option("poka_product_tag_" . $v);
 						
 						if($i > 3){
@@ -127,7 +140,11 @@
 						if(!empty($terms)){
 							$sTitleTag = '<h3 class="title-tag">' . $terms->name . '</h3>';
 						}
-						$sHtml .= '<div class="item">
+						
+						if($flag == true){
+							$flag = false;
+							
+							$sHtmlFirst = '<div class="item">
 										'.$sTitleTag.'
 			                            <img src="'.$sImage.'">
 			                            <div class="action-set">
@@ -135,16 +152,27 @@
 			                                <button class="btn add-now" data-all="'.$sAllData.'" value="'.$v.'">Thêm vào cấu hình</button>
 			                            </div>
 			                        </div>';
+						}else{
+							$sHtml .= '<div class="item">
+										'.$sTitleTag.'
+			                            <img src="'.$sImage.'">
+			                            <div class="action-set">
+			                                <button class="btn view-now" data-all="'.$sAllData.'" value="'.$v.'">Xem nhanh</button>
+			                                <button class="btn add-now" data-all="'.$sAllData.'" value="'.$v.'">Thêm vào cấu hình</button>
+			                            </div>
+			                        </div>';
+						}
+						
 						
 						$i++;
 					}
 				}
 			}
 			
-			
-			if(empty($sHtml)){
+			if(empty($sHtml) && empty($sHtmlFirst)){
 				return '<p>Hiện tại chưa có SET Đồ</p>';
 			}else{
+				$sHtml = $sHtmlFirst . $sHtml;
 				$sHtml .= '<div class="action">
                                     <button class="btn view-all-set" data-all="'.$sAllData.'">Xem tất cả</button>
                                 </div>';

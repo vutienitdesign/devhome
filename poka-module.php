@@ -43,6 +43,7 @@ class POKA_Plugin{
 			'PMCommon'            => 'class_common.php',
 			'POKA_Session'        => 'class_session.php',
 			'POKA_Helper'         => 'class_helper.php',
+			'POKA_CustomPostType' => 'class_post_type.php',
 			'POKA_Controller'     => 'class_controller.php',
 			'Poka_Widget'         => 'class_widget.php',
 			'POKA_Custom_MetaBox' => 'class_metabox.php',

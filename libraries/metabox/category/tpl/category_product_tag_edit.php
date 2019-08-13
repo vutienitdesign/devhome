@@ -58,7 +58,6 @@
 			$sHtml = '';
 			$sProductHidden = '';
 			$the_query = new WP_Query( $args );
-			
 			$i = 0;
 			if($the_query->have_posts() ) :
 				while ( $the_query->have_posts() ) : $the_query->the_post();
@@ -80,6 +79,8 @@
                                                 <input '.$sCheckedMedium.' name="medium[medium-'.$i.']" type="radio" value="'.$sID.'" id="'.$sID.'-'.$iTmp.'">
                                                 <label for="'.$sID.'-'.$iTmp.'">'.$v['name'].'</label>
                                              </p>';
+			                
+			                
 				            $iTmp++;
                         }
                     }
@@ -113,3 +114,31 @@
     </td>
 </tr>
 <input type="hidden" name="all_product" value="<?php echo $sProductHidden; ?>" />
+
+<tr class="form-field">
+    <th>Độ ưu tiên SET Đồ</th>
+    <td>
+        <?php
+	        $posts = get_posts(array(
+		        'post_type' => 'iart-style-set',
+		        'post_status' => 'publish',
+		        'numberposts' => -1
+            ));
+	
+	        $postChecked = get_option("iart_priority_set_tag_" . $term_id);
+	        $sHtml = '';
+	        if(!empty($posts)){
+	            foreach($posts as $v){
+	                if($postChecked == $v->ID){
+		                $sHtml .= '<option selected="selected" value="'.$v->ID.'">'.$v->post_title.'</option>';
+                    }else{
+		                $sHtml .= '<option value="'.$v->ID.'">'.$v->post_title.'</option>';
+                    }
+                }
+            }
+        ?>
+        <select name="priority_set" class="regular-text">
+            <?php echo $sHtml ?>
+        </select>
+    </td>
+</tr>

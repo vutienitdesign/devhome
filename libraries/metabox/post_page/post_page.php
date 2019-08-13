@@ -9,18 +9,21 @@ class POKA_MetaBox_Post_Page {
 	}
 	
 	public function display(){
-		wp_enqueue_style('poka_metabox_post_page');
-		wp_enqueue_script('poka_metabox_post_page');
+//		wp_enqueue_style('poka_metabox_post_page');
+//		wp_enqueue_script('poka_metabox_post_page');
 		
 		$postID 	= !empty($_REQUEST["post"]) ? $_REQUEST["post"] : 0;
 		$postType	= get_post_type($postID);
 		
 		switch($postType) {
-			case "post":
+			/*case "post":
 				add_meta_box( 'poka_metabox', '- [Poka] Cấu hình', array($this, "post"), 'post' , "normal", "high" );
 			case "page":
 				add_meta_box( 'poka_metabox', '- [Poka] Cấu hình', array($this, "page"), 'page' , "normal", "high" );
-				break;
+				break;*/
+			/*case "style-set":
+				add_meta_box( 'poka_metabox', '- [iArt] Cấu hình', array($this, "styleset"), 'style-set' , "normal", "high" );
+				break;*/
 		}
 	}
 	
@@ -36,12 +39,14 @@ class POKA_MetaBox_Post_Page {
 		$data     = $_POST;
 		
 		if($postType == 'post'){
-			$this->save_post($postID, $data);
 		}
 		
 		if($postType == 'page'){
-			$this->save_page($postID, $data);
 		}
+	}
+	
+	public function styleset(){
+//		wp_enqueue_style('single_style_set', _POKA_PLUGIN_LIB_URL_ . 'metabox/post_page/css/single-style-set.min.css');
 	}
 	
 	/*Hien Thi HTML Trang Post*/
@@ -54,19 +59,5 @@ class POKA_MetaBox_Post_Page {
 	public function page(){
 		wp_nonce_field($this->_meta_box_id,$this->_meta_box_id . '-nonce');
 		
-	}
-	
-	/*Save Trang Post*/
-	public function save_post($postID = 0, $data = array()){
-		echo "<pre style='font-weight: bold; color: red;'>";
-		    print_r($data);
-		echo "</pre>";
-	}
-	
-	/*Save Trang Page*/
-	public function save_page($postID = 0, $data = array()){
-		echo "<pre style='font-weight: bold; color: red;'>";
-		    print_r($data);
-		echo "</pre>";
 	}
 }

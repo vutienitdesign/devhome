@@ -56,6 +56,9 @@
 						$product = wc_get_product($id);
 						
 						$idSmall = get_post_meta($id, 'decorate_small', true);
+						if(empty($idSmall)){
+							continue;
+						}
 						
 						$sClassActive = '';
 						if(in_array($id, $aProductExit)){

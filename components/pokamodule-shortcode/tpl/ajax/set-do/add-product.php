@@ -16,7 +16,7 @@
 		
 		if(!empty($product)){
 			$sHtml = '<tr data-id="'.$dataID.'" data-product="'.$idProduct.'" class="data-product product-id-'.$idProduct.' product-temp-'.$idRandom.'" data-type="set">
-                    <td><img class="img-product" src="'.$imageUrl.'" alt="'.$sTitle.'"></td>
+                    <td class="image"><img class="img-product" src="'.$imageUrl.'" alt="'.$sTitle.'"></td>
                     <td>
                     	<a href="'.$product->get_permalink().'" target="_blank">'.$sTitle.'</a>
                     	<div class="info">
@@ -40,6 +40,8 @@
                     </td>
                 </tr>';
 		}
+	}else{
+	
 	}
 	
 	echo json_encode(

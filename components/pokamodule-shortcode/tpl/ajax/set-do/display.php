@@ -2,9 +2,16 @@
 	$sHtml = '';
 	
 	$term_id = $_POST['term_id'];
+	
+	if($_POST['term_priority'] > 0){
+		$termPriority = $_POST['term_priority'];
+	}else{
+		$termPriority = '';
+	}
+	
 	if($term_id > 0){
 		global $pokaHelper;
-		$sHtml = $pokaHelper->getDataSet3SetDo($term_id);
+		$sHtml = $pokaHelper->getDataSet3SetDo($term_id, $termPriority);
 	}
 	
 	global $wpdb;

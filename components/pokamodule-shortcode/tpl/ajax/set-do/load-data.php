@@ -61,20 +61,25 @@
 					if($the_query->have_posts()):
 						while($the_query->have_posts() ) : $the_query->the_post();
 							$id       = get_the_ID();
+							$idSmall = get_post_meta($id, 'decorate_small', true);
+							if(empty($idSmall)){
+								continue;
+							}
+							
 							$sTitle   = get_the_title();
 							$sLink    = get_permalink();
 							$imageUrl = wp_get_attachment_image_src(get_post_thumbnail_id($id))[0];
 							
 							$product = wc_get_product($id);
-							
-							$idSmall = get_post_meta($id, 'decorate_small', true);
-							
 							$sClassActive = '';
+							$sTextActive = '';
 							if(in_array($id, $aProductExit)){
 								$sClassActive = 'activate-choose';
+								$sTextActive = '<p class="text-active">Sản phẩm đã lựa chọn</p>';
 							}
 							
-							$sHtmlProduct .= ' <div class="items"><div class="item '.$sClassActive.'">
+							$sHtmlProduct .= ' <div class="items">
+ 												<div class="item '.$sClassActive.'">
 					                            <div class="image">
 													<a href="'.$sLink.'" target="_blank"><img src="'.$imageUrl.'" alt="'.$sTitle.'"></a>
 												</div>
@@ -88,6 +93,7 @@
 													</ul>
 												</div>
 					                            <div class="action">
+					                            	'.$sTextActive.'
 					                            	<button type="button" value="'.$id.'" class="button add-config" data-type="'.$typeProduct.'" data-id="'.$idSmall.'" data-all="'.$allData.'" data-term="'.$v.'" data-product-edit="'.$idProductChange.'">Thêm vào cấu hình</button>
 												</div>
 					                        </div></div>';

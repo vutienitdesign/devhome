@@ -98,6 +98,12 @@
 				);
 			}
 			
+			if(!empty($_POST['all_product'])){
+				$aProduct    = explode(',', $_POST['all_product']);
+				foreach($aProduct as $productID){
+					delete_post_meta($productID, 'decorate_small');
+				}
+			}
 			if(!empty($_POST['medium'])){
 				foreach($_POST['medium'] as $v){
 					$aMedium    = explode('-', $v);
@@ -108,25 +114,45 @@
 			if(!empty($arrData)){
 				update_option("poka_product_tag_" . $term_id, $arrData);
 			}
+			
+			if(!empty($_POST['priority_set'])){
+				update_option("iart_priority_set_tag_" . $term_id, $_POST['priority_set']);
+			}else{
+				delete_option("iart_priority_set_tag_" . $term_id);
+			}
 		}
 		
 		function column_position_product_tag($columns){
 			$new = array();
 			foreach($columns as $key => $title) {
 				if($key == "name"){
+					$new['id'] = 'ID';
 					$new['image'] = 'Thumbnail';
+					$new['priority'] = 'Style Set đồ';
 				}
-				$new[ $key ]     = $title;
+				$new[$key]     = $title;
 			}
+			unset($new['catchids']);
 			return $new;
 		}
 		
 		function column_content_product_tag( $value, $column_name, $tax_id ){
-			if($column_name == 'image' || $column_name == 'priority'){
+			if($column_name == 'id' || $column_name == 'image' || $column_name == 'priority'){
 				$aData = get_option("poka_product_tag_" . $tax_id);
 				if(!empty($aData)){
 					if($column_name == 'image'){
 						return '<img height="48" width="48" src="'.wp_get_attachment_image_src($aData['image']['id'])[0].'" />';
+					}
+				}
+				
+				if($column_name == 'id'){
+					return $tax_id;
+				}
+				
+				if($column_name == 'priority'){
+					$post  = get_option("iart_priority_set_tag_" . $tax_id);
+					if(!empty($post)){
+						return get_the_title($post);
 					}
 				}
 			}

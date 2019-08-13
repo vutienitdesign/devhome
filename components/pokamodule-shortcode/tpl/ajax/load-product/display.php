@@ -8,6 +8,7 @@
 	$nameProduct        = sanitize_text_field($_POST['name-product']);
 	$aAttributes        = isset($_POST['attributes']) ? (array) $_POST['attributes'] : array();
 	$typeProduct        = ($_POST['type-proudct'] == 'add') ? 'add' : 'edit';
+	$aCheck = array(); //Test
 	
 	/*================================SATRT Get Search Attributes================*/
 	$aDataSearch = array();
@@ -127,10 +128,11 @@
 			$product = wc_get_product($id);
 			
 			$sClassActive = '';
+			$sTextActive = '';
 			if(in_array($id, $aProductExit)){
 				$sClassActive = 'activate-choose';
+				$sTextActive = '<p class="text-active">Sản phẩm đã lựa chọn</p>';
 			}
-			
 			
 			$sHtmlProduct .= '<div class="item '.$sClassActive.'">
 						<div class="image">
@@ -146,6 +148,7 @@
 							</ul>
 						</div>
 						<div class="action">
+							'.$sTextActive.'
 							<button type="button" value="'.$id.'" data-id="'.$dataProductCurrent.'" class="button add-config" data-product="'.$idProductChange.'" data-type="'.$typeProduct.'" data-temp="'.$idProductTemp.'" data-term="'.$termID.'">Thêm vào cấu hình</button>
 						</div>
 						<div class="clear"></div>
@@ -286,6 +289,6 @@
 	echo json_encode(
 		array(
 			'data' => $sHtml,
-			'msg' => $msg
+			'msg' => $aCheck
 		)
 	);
