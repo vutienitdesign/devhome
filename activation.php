@@ -10,6 +10,22 @@
 			
 			$sPrefix = $wpdb->prefix;
 			
+			//Tabel log_click_build
+			$tbl = $sPrefix . 'log_click_build';
+			if($wpdb->get_var("show tables like '$tbl'") != $tbl){
+				$sql = "CREATE TABLE " . $tbl . " (
+						`id` bigint(20) NOT NULL AUTO_INCREMENT,
+						`id_temp` 	text,
+						`total` 	int(11),
+						`type` 	varchar(255),
+						`date_update` 	int(11),
+						PRIMARY KEY (id)
+				) DEFAULT CHARACTER SET = 'utf8' DEFAULT COLLATE 'utf8_general_ci';";
+				
+				require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+				dbDelta($sql);
+			}
+			
 			//Tabel manager_builder_product
 			$tbl = $sPrefix . 'manager_builder_product';
 			if($wpdb->get_var("show tables like '$tbl'") != $tbl){

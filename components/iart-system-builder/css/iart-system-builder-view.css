@@ -57,24 +57,36 @@ td.product span {
   display: inline-block;
   width: 100px; }
 
-td.custom-product .item-custom {
-  border-bottom: 1px solid red;
-  margin-bottom: 10px;
-  padding-bottom: 10px; }
-  td.custom-product .item-custom:last-child {
-    border-bottom: 0;
-    margin-bottom: 0;
-    padding-bottom: 0; }
-  td.custom-product .item-custom span {
-    width: 150px;
-    display: inline-block;
-    font-weight: bold; }
-  td.custom-product .item-custom .image {
-    width: 100px; }
+tr.custom-info {
+  background-color: #ffffff !important; }
+
+td.custom-product table {
+  width: 100%;
+  border-collapse: collapse; }
+  td.custom-product table tr {
+    background-color: #ffffff !important; }
+  td.custom-product table th {
+    background-color: #ddd;
+    color: #333;
+    border: 1px solid #fff; }
+  td.custom-product table img {
+    width: 80px; }
 
 .info-product .data-item {
   border: 1px solid red;
   padding: 20px;
   margin-bottom: 30px; }
+
+.info-click {
+  width: 100%;
+  border-collapse: collapse; }
+  .info-click th.stt {
+    width: 4%;
+    text-align: center; }
+  .info-click td.stt {
+    text-align: center; }
+  .info-click td, .info-click th {
+    border: 1px solid #ddd;
+    padding: 5px 8px; }
 
 /*# sourceMappingURL=iart-system-builder-view.css.map */

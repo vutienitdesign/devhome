@@ -89,27 +89,27 @@ td.product{
     }
 }
 
+tr.custom-info{
+    background-color: #ffffff !important;
+}
 
 td.custom-product{
-    .item-custom{
-        border-bottom: 1px solid red;
-        margin-bottom: 10px;
-        padding-bottom: 10px;
+    table{
+        width: 100%;
+        border-collapse: collapse;
 
-        &:last-child{
-            border-bottom: 0;
-            margin-bottom: 0;
-            padding-bottom: 0;
+        tr{
+            background-color: #ffffff !important;
         }
 
-        span{
-            width: 150px;
-            display: inline-block;
-            font-weight: bold;
+        th{
+            background-color: #ddd;
+            color: #333;
+            border: 1px solid #fff;
         }
 
-        .image{
-            width: 100px;
+        img{
+            width: 80px;
         }
     }
 }
@@ -122,3 +122,21 @@ td.custom-product{
     }
 }
 
+.info-click{
+    width: 100%;
+    border-collapse: collapse;
+
+    th.stt{
+        width: 4%;
+        text-align: center;
+    }
+
+    td.stt{
+        text-align: center;
+    }
+
+    td,th{
+        border: 1px solid #ddd;
+        padding: 5px 8px;
+    }
+}

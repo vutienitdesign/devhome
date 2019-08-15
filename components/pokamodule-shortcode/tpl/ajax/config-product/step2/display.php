@@ -68,14 +68,53 @@
 				
 				global $wpdb;
 				$tbl = $wpdb->prefix . 'manager_builder_product';
+				$nTime = _REAL_TIME_;
 				$data = array(
 					'id_temp' => $idTemp,
 					'user_id' => get_current_user_id(),
 					'data'    => serialize($arrSave),
-					'date'    => _REAL_TIME_,
-					'date_update'    => _REAL_TIME_,
+					'date'    => $nTime,
+					'date_update'    => $nTime,
 				);
 				$format =  array('%s','%d','%s','%d','%d');
+				$wpdb->insert($tbl, $data,$format);
+				
+				//Insert Log
+				$tbl = $wpdb->prefix . 'log_click_build';
+				$data = array(
+					'id_temp' => $idTemp,
+					'total'    => 0,
+					'type'    => 'view-demo',
+					'date_update'    => $nTime,
+				);
+				$format =  array('%s','%d','%s','%d');
+				$wpdb->insert($tbl, $data,$format);
+				
+				$data = array(
+					'id_temp' => $idTemp,
+					'total'    => 0,
+					'type'    => 'contact-support',
+					'date_update'    => $nTime,
+				);
+				$format =  array('%s','%d','%s','%d');
+				$wpdb->insert($tbl, $data,$format);
+				
+				$data = array(
+					'id_temp' => $idTemp,
+					'total'    => 0,
+					'type'    => 'download-pdf',
+					'date_update'    => $nTime,
+				);
+				$format =  array('%s','%d','%s','%d');
+				$wpdb->insert($tbl, $data,$format);
+				
+				$data = array(
+					'id_temp' => $idTemp,
+					'total'    => 0,
+					'type'    => 'add-cart',
+					'date_update'    => $nTime,
+				);
+				$format =  array('%s','%d','%s','%d');
 				$wpdb->insert($tbl, $data,$format);
 			}else{
 				$arrResult = array(

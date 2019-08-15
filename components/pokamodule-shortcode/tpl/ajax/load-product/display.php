@@ -8,7 +8,7 @@
 	$nameProduct        = sanitize_text_field($_POST['name-product']);
 	$aAttributes        = isset($_POST['attributes']) ? (array) $_POST['attributes'] : array();
 	$typeProduct        = ($_POST['type-proudct'] == 'add') ? 'add' : 'edit';
-	$aCheck = array(); //Test
+	$loadmore           = !empty($_POST['loadmore']) ? $_POST['loadmore'] : '';
 	
 	/*================================SATRT Get Search Attributes================*/
 	$aDataSearch = array();
@@ -157,7 +157,7 @@
 	endif;
 	wp_reset_postdata();
 	
-	$aPagi = paginate_links( array(
+	/*$aPagi = paginate_links( array(
 		'base'         => str_replace( 999999999, '%#%', esc_url(get_pagenum_link( 999999999))),
 		'total'        => $the_query->max_num_pages,
 		'current'      => $paged,
@@ -191,7 +191,7 @@
 			$sHtmlPagi .= '<li>'.$v.'</li>';
 		}
 		$sHtmlPagi .= '</ul>';
-	}
+	}*/
 	
 	//=========== START HTML SORT ================
 	$sHtmlSort = '<div class="sort-data">
@@ -251,9 +251,6 @@
 		$sHtmlData = '<div class="box-right">
 						<div class="box-action">
 							'.$sHtmlSort.'
-							<div class="pagi">
-								'.$sHtmlPagi.'
-							</div>
 							<div class="clear"></div>
 						</div>
 						<div class="list-product-select">
@@ -273,7 +270,11 @@
 					</div>';
 	}
 	
-	$sHtml = '<div class="modal-content box-choose-product">
+	if($loadmore == 'load'){
+		$sHtml = $sHtmlProduct;
+	}else{
+		$sHtml = '<div class="modal-content box-choose-product">
+				<div class="loader"></div>
 				<div class="modal-header">
 					<h2 class="title">'.$sTitle.'</h2>
 					<div class="box-close"><span class="close">&times;</span></div>
@@ -285,10 +286,11 @@
 					<div class="clear"></div>
 				</div>
 			</div>';
+	}
 	
 	echo json_encode(
 		array(
 			'data' => $sHtml,
-			'msg' => $aCheck
+			'msg' => ''
 		)
 	);

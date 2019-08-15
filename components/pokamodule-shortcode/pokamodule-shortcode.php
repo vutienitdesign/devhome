@@ -110,6 +110,16 @@
 				case "ajax-remove-custom-info":
 					$this->ajaxRemoveCustomInfo();
 					break;
+				
+				//Log Click Button
+				case "ajax-log-click":
+					$this->ajaxLogClick();
+					break;
+				
+				//View Demo
+				case "ajax-view-demo":
+					$this->ajaxViewDemo();
+					break;
 					
 				default:
 					die("NOTHING");
@@ -228,6 +238,18 @@
 		private function ajaxRemoveCustomInfo(){
 			check_ajax_referer('ajax-security-code', 'security');
 			require_once $this->sPath . '/tpl/ajax/update-session/delete.php';
+			die();
+		}
+		
+		private function ajaxLogClick(){
+			check_ajax_referer('ajax-security-code', 'security');
+			require_once $this->sPath . '/tpl/ajax/log-click/display.php';
+			die();
+		}
+		
+		private function ajaxViewDemo(){
+			check_ajax_referer('ajax-security-code', 'security');
+			require_once $this->sPath . '/tpl/ajax/view-demo/display.php';
 			die();
 		}
 	}

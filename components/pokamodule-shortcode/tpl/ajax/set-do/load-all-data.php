@@ -61,8 +61,10 @@
 						}
 						
 						$sClassActive = '';
+						$sTextActive = '';
 						if(in_array($id, $aProductExit)){
 							$sClassActive = 'activate-choose';
+							$sTextActive = '<p class="text-active">Sản phẩm đã lựa chọn</p>';
 						}
 						
 						$sHtmlProduct .= ' <div class="items"><div class="item '.$sClassActive.'">
@@ -79,6 +81,7 @@
 													</ul>
 												</div>
 					                            <div class="action">
+					                            	'.$sTextActive.'
 					                            	<button type="button" value="'.$id.'" class="button add-config" data-type="'.$typeProduct.'" data-id="'.$idSmall.'" data-all="'.$dataTerm.'" data-term="'.$term_id.'" data-product-edit="'.$idProductChange.'">Thêm vào cấu hình</button>
 												</div>
 					                        </div></div>';

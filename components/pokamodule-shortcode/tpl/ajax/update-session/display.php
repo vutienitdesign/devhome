@@ -122,8 +122,10 @@
 						$i++;
 					}
 				}
+				
 				foreach($_SESSION['iart_config_product']['step3'][$tabcrrent] as $k => $v){
 					if($k == 'custom-info'){
+						$_SESSION['iart_config_product']['step3'][$tabcrrent]['custom-info'] = array();
 						continue;
 					}
 					
