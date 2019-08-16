@@ -48,6 +48,23 @@
 ?>
 
 <?php
+	$getMsg = $pokaSession->get('msg');
+	if(!empty($getMsg)){
+		$pokaSession->delete('msg');
+		?>
+        <script type="text/javascript">
+            jQuery(document).ready(function($){
+                $.alert({
+                    title: 'Thông báo!',
+                    content: '<?php echo $getMsg['msg']; ?>',
+                    type: 'orange',
+                    typeAnimated: true,
+                });
+            });
+        </script>
+		<?php
+	}
+	
 	if(!empty($result)){
 		$sHtml = '';
 		
@@ -68,10 +85,12 @@
 			
 			$sLink = get_permalink() . 'remove-product/?restore=' . $v['id'];
 			$sLink = wp_nonce_url($sLink, 'builder_product_none', 'builder_product');
-			$sRestore = '<a href="'.$sLink.'" class="button remove-builder"><i class="fa fa-undo"></i> Khôi phục</a>';
+			$sRestore = '<div class="iart-tooltip">
+                            <a href="'.$sLink.'" class="button remove-builder"><i class="fa fa-undo"></i></a>
+                           <span class="tooltiptext">Khôi phục</span>
+                        </div>';
 			$sHtml .= '<tr>
                         <td>'.$i.'</td>
-                        <td>'.$v['id'].'</td>
                         <td>'.$v['name'].'</td>
                         <td>'.$sHtmlData.'</td>
                         <td>'.date('d/m/Y h:i:s', $v['date']).'</td>
@@ -85,12 +104,11 @@
 			<table>
 				<tr>
 					<th>STT</th>
-					<th>ID</th>
 					<th>Tên dự án</th>
 					<th>Không gian</th>
 					<th>Ngày tạo</th>
 					<th>Ngày sửa</th>
-					<th>Thao tác</th>
+					<th class="action">Thao tác</th>
 				</tr>
 				<?php echo $sHtml; ?>
 			</table>

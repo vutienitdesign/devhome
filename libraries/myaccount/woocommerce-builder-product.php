@@ -46,7 +46,6 @@
 ?>
 
 <?php
-	
 	$getMsg = $pokaSession->get('msg');
 	if(!empty($getMsg)){
 		$pokaSession->delete('msg');
@@ -84,14 +83,20 @@
             }
             
             $sLink = get_permalink(5196) . '?type=choose-product&restore=' . $v['id'];
-            $sRestore = '<a href="'.$sLink.'" class="button restore-remove-builder"><i class="fa fa-undo"></i> Xem dự án</a>';
+            $sRestore = '<div class="iart-tooltip">
+                            <a href="'.$sLink.'" class="button restore-remove-builder"><i class="fa fa-eye"></i></a>
+                           <span class="tooltiptext">Xem dự án</span>
+                        </div>';
 	
 	        $sLink = get_permalink() . 'builder-product/?remove=' . $v['id'];
 	        $sLink = wp_nonce_url($sLink, 'builder_product_none', 'builder_product');
-            $sDelete = '<a href="'.$sLink.'" class="button remove-builder"  onclick="return confirm(\'Bạn có chắc chắn muốn xóa?\');"><i class="fa fa-trash"></i> Xóa</a>';
-	        $sHtml .= '<tr>
+	        $sDelete = '<div class="iart-tooltip">
+                            <a href="'.$sLink.'" class="button remove-builder"><i class="fa fa-trash"></i></a>
+                           <span class="tooltiptext">Xóa</span>
+                        </div>';
+            
+            $sHtml .= '<tr>
                         <td>'.$i.'</td>
-                        <td>'.$v['id'].'</td>
                         <td>'.$v['name'].'</td>
                         <td>'.$sHtmlData.'</td>
                         <td>'.date('d/m/Y h:i:s', $v['date']).'</td>
@@ -105,12 +110,11 @@
             <table>
                 <tr>
                     <th>STT</th>
-                    <th>ID</th>
                     <th>Tên dự án</th>
                     <th>Không gian</th>
                     <th>Ngày tạo</th>
                     <th>Ngày sửa</th>
-                    <th>Thao tác</th>
+                    <th class="action">Thao tác</th>
                 </tr>
                 <?php echo $sHtml; ?>
             </table>

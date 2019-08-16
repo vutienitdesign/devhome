@@ -75,7 +75,7 @@
 							$sTextActive = '';
 							if(in_array($id, $aProductExit)){
 								$sClassActive = 'activate-choose';
-								$sTextActive = '<p class="text-active">Sản phẩm đã lựa chọn</p>';
+								$sTextActive = '<p class="text-active"><i class="fa fa-check"></i> Sản phẩm đã lựa chọn</p>';
 							}
 							
 							$sHtmlProduct .= ' <div class="items">

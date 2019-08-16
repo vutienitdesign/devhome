@@ -23,13 +23,12 @@ $colorVang: #fed700;
 }
 
 td.action{
+    text-align: center;
     .button{
         background-color: $colorVang;
         color: #000;
-        background-color: #fed700;
-        color: #000;
-        padding: 5px 15px;
-        font-size: 14px;
+        padding: 7px 13px;
+        font-size: 13px;
 
         .fa{
             font-size: 12px;
@@ -43,5 +42,46 @@ td.action{
 
     .restore-remove-builder{
         margin-right: 5px;
+    }
+}
+
+th.action{
+    text-align: center;
+}
+
+.iart-tooltip {
+    position: relative;
+    display: inline-block;
+
+    .tooltiptext {
+        visibility: hidden;
+        width: 120px;
+        background-color: black;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 0;
+        position: absolute;
+        z-index: 1;
+        bottom: 150%;
+        left: 50%;
+        margin-left: -60px;
+    }
+
+    .tooltiptext::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        margin-left: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: black transparent transparent transparent;
+    }
+
+    &:hover{
+        .tooltiptext {
+            visibility: visible;
+        }
     }
 }

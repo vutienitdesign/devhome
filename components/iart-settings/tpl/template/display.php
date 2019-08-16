@@ -58,6 +58,12 @@
                     <p class="description">Insert code into the <strong>footer</strong> position</p>
                 </td>
             </tr>
+            <tr>
+                <th>ID FORM Cart Yêu cầu tư vấn</th>
+                <td>
+                    <input name="poka[formcart]" type="number" value="<?php echo $vData['formcart']; ?>" class="regular-text">
+                </td>
+            </tr>
         </table>
 
         <p class="submit">
