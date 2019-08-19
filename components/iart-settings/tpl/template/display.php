@@ -64,6 +64,18 @@
                     <input name="poka[formcart]" type="number" value="<?php echo $vData['formcart']; ?>" class="regular-text">
                 </td>
             </tr>
+            <tr>
+                <th>ID Trang Xây dựng cấu hình sản phẩm</th>
+                <td>
+                    <input name="poka[config_product]" type="number" value="<?php echo $vData['config_product']; ?>" class="regular-text">
+                </td>
+            </tr>
+            <tr>
+                <th>ID Trang Báo giá sản phẩm</th>
+                <td>
+                    <input name="poka[baogia]" type="number" value="<?php echo $vData['baogia']; ?>" class="regular-text">
+                </td>
+            </tr>
         </table>
 
         <p class="submit">

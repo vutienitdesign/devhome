@@ -46,8 +46,8 @@
 	                                    </ul>
 							        </div>
 							    </td>
-							    <td>'.wc_price($product->get_price()).'</td>
-							    <td><input type="number" class="input-text soluong custom-data-id" value="'.$quantity.'" min="1" data-id="'.$dataID.'" data-product="'.$idProduct.'" data-price="'.$product->get_price().'" data-type="set" data-tag="'.$option['term'].'|'.$option['all_term'].'"></td>
+							    <td class="unit-price">'.wc_price($product->get_price()).'</td>
+							    <td class="amount"><input type="number" class="input-text soluong custom-data-id" value="'.$quantity.'" min="1" data-id="'.$dataID.'" data-product="'.$idProduct.'" data-price="'.$product->get_price().'" data-type="set" data-tag="'.$option['term'].'|'.$option['all_term'].'"></td>
 							    <td class="html-price">'.wc_price($product->get_price() * $quantity).'</td>
 							    <td class="action">
 							        <div class="iart-tooltip">
@@ -71,8 +71,8 @@
                                     </ul>
                                 </div>
                             </td>
-                            <td>'.wc_price($product->get_price()).'</td>
-                            <td><input type="number" class="input-text soluong" value="'.$quantity.'" min="1" data-id="'.$dataID.'" data-product="'.$idProduct.'" data-price="'.$product->get_price().'"></td>
+                            <td class="unit-price">'.wc_price($product->get_price()).'</td>
+                            <td class="amount"><input type="number" class="input-text soluong" value="'.$quantity.'" min="1" data-id="'.$dataID.'" data-product="'.$idProduct.'" data-price="'.$product->get_price().'"></td>
                             <td class="html-price">'.wc_price($product->get_price() * $quantity).'</td>
                             <td class="action">
                                <div class="iart-tooltip">
@@ -107,6 +107,7 @@
 			
 			$sAllData   = '';
 			$sHtmlFirst = ''; //Uu tien chon SET
+			$nTotal = 0;
 			if(!empty($result)){
 				$aTag = explode(',', $result['tag']);
 				if(!empty($aTag)){
@@ -114,6 +115,8 @@
 						$sAllData .= ',' . $v;
 					}
 					$sAllData = ltrim($sAllData, ',');
+					
+					$nTotal = count($aTag);
 					
 					$i = 1;
 					$flag = false;
@@ -148,8 +151,8 @@
 										'.$sTitleTag.'
 			                            <img src="'.$sImage.'">
 			                            <div class="action-set">
-			                                <button class="btn view-now" data-all="'.$sAllData.'" value="'.$v.'">Xem nhanh</button>
-			                                <button class="btn add-now" data-all="'.$sAllData.'" value="'.$v.'">Thêm vào cấu hình</button>
+			                                <button class="btn view-now" data-all="'.$sAllData.'" value="'.$v.'">Xem Chi Tiết</button>
+			                                <button class="btn add-now" data-all="'.$sAllData.'" value="'.$v.'">Chọn Bộ Này</button>
 			                            </div>
 			                        </div>';
 						}else{
@@ -157,12 +160,11 @@
 										'.$sTitleTag.'
 			                            <img src="'.$sImage.'">
 			                            <div class="action-set">
-			                                <button class="btn view-now" data-all="'.$sAllData.'" value="'.$v.'">Xem nhanh</button>
-			                                <button class="btn add-now" data-all="'.$sAllData.'" value="'.$v.'">Thêm vào cấu hình</button>
+			                                <button class="btn view-now" data-all="'.$sAllData.'" value="'.$v.'">Xem Chi Tiết</button>
+			                                <button class="btn add-now" data-all="'.$sAllData.'" value="'.$v.'">Chọn Bộ Này</button>
 			                            </div>
 			                        </div>';
 						}
-						
 						
 						$i++;
 					}
@@ -170,14 +172,21 @@
 			}
 			
 			if(empty($sHtml) && empty($sHtmlFirst)){
-				return '<p>Hiện tại chưa có SET Đồ</p>';
+				$sHtml = '<p>Hiện tại chưa có SET Đồ</p>';
+				$status = 'no';
 			}else{
 				$sHtml = $sHtmlFirst . $sHtml;
 				$sHtml .= '<div class="action">
                                     <button class="btn view-all-set" data-all="'.$sAllData.'">Xem tất cả</button>
                                 </div>';
-				return $sHtml;
+				$status = 'yes';
 			}
+			
+			return array(
+				'data' => $sHtml,
+				'total' => $nTotal,
+				'status' => $status
+			);
 		}
 		
 		//Get data Set 3 cau hinh san pham

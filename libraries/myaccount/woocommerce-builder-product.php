@@ -68,6 +68,14 @@
 	    $sHtml = '';
 	    
 	    $i = 1;
+		
+		$idConfig = get_option("_iart_page_config_product");
+		$sLinkRestore = '';
+		$sRestore = '';
+		if(!empty($idConfig)){
+			$sLinkRestore = get_permalink($idConfig) . '?type=choose-product&restore=';
+        }
+		
         foreach($result as $v){
             $aData = unserialize($v['data']);
 	        $sHtmlData = '';
@@ -81,12 +89,13 @@
 	
 	            $sHtmlData = ltrim($sHtmlData, ',');
             }
-            
-            $sLink = get_permalink(5196) . '?type=choose-product&restore=' . $v['id'];
-            $sRestore = '<div class="iart-tooltip">
-                            <a href="'.$sLink.'" class="button restore-remove-builder"><i class="fa fa-eye"></i></a>
+	
+            if(!empty($sLinkRestore)){
+	            $sRestore = '<div class="iart-tooltip">
+                            <a href="'.$sLinkRestore.'" class="button restore-remove-builder"><i class="fa fa-eye"></i></a>
                            <span class="tooltiptext">Xem dự án</span>
                         </div>';
+            }
 	
 	        $sLink = get_permalink() . 'builder-product/?remove=' . $v['id'];
 	        $sLink = wp_nonce_url($sLink, 'builder_product_none', 'builder_product');
@@ -99,21 +108,21 @@
                         <td>'.$i.'</td>
                         <td>'.$v['name'].'</td>
                         <td>'.$sHtmlData.'</td>
-                        <td>'.date('d/m/Y h:i:s', $v['date']).'</td>
-                        <td>'.date('d/m/Y h:i:s', $v['date_update']).'</td>
+                        <td class="date">'.date('d/m/Y', $v['date']).' <br /> '.date('h:i:s', $v['date']).'</td>
+                        <td class="date">'.date('d/m/Y', $v['date_update']).' <br />'.date('h:i:s', $v['date_update']).'</td>
                         <td class="action">'.$sRestore.$sDelete.'</td>
                     </tr>';
 	        $i++;
         }
         ?>
-        <div class="woocommerce-builder-product">
+        <div class="woocommerce-builder-product builder-product">
             <table>
                 <tr>
                     <th>STT</th>
                     <th>Tên dự án</th>
                     <th>Không gian</th>
-                    <th>Ngày tạo</th>
-                    <th>Ngày sửa</th>
+                    <th class="date">Ngày tạo</th>
+                    <th class="date">Ngày sửa</th>
                     <th class="action">Thao tác</th>
                 </tr>
                 <?php echo $sHtml; ?>

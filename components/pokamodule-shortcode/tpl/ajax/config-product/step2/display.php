@@ -25,13 +25,13 @@
 				$sHtml = '<div class="modal-content box-config-product-step2">
 						<div class="modal-header">
 							<span class="close">&times;</span>
-							<h2 class="title">Thông tin cấu hình</h2>
+							<h2 class="title">Thông tin chi tiết</h2>
 						</div>
 						<div class="modal-body">
 							<div class="choose">
 							<div class="item item-project">
-								<label class="lbl">Tên dự án:</label>
-								<input type="text" class="name-project" value="" placeholder="Tên dự án...">
+								<label class="lbl">Tên gợi nhớ:</label>
+								<input type="text" class="name-project" value="" placeholder="Ví dụ: Tuyết Nhi - 141 Nguyễn Khang....">
 							</div>';
 				
 				$arrStep = array();
@@ -52,7 +52,7 @@
 				
 				$sHtml .= '</div>
 							<div class="action">
-								<button type="button" class="bottom btn-step2">Next <i class="fa fa-angle-right"></i></button>
+								<button type="button" class="bottom btn-step2">Tiếp <i class="fa fa-angle-right"></i></button>
 							</div>
 						</div>
 					</div>';
@@ -82,10 +82,10 @@
 				//Insert Log
 				$tbl = $wpdb->prefix . 'log_click_build';
 				$data = array(
-					'id_temp' => $idTemp,
-					'total'    => 0,
-					'type'    => 'view-demo',
-					'date_update'    => $nTime,
+					'id_temp'     => $idTemp,
+					'total'       => 0,
+					'type'        => 'view-demo',
+					'date_update' => $nTime,
 				);
 				$format =  array('%s','%d','%s','%d');
 				$wpdb->insert($tbl, $data,$format);

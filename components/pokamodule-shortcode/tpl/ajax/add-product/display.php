@@ -21,8 +21,8 @@
 							</ul>
 						</div>
                     </td>
-                    <td>'.wc_price($product->get_price()).'</td>
-                    <td><input type="number" class="input-text soluong" value="1" min="1" data-id="'.$dataID.'" data-product="'.$idProduct.'" data-price="'.$product->get_price().'"></td>
+                    <td class="unit-price">'.wc_price($product->get_price()).'</td>
+                    <td class="amount"><input type="number" class="input-text soluong" value="1" min="1" data-id="'.$dataID.'" data-product="'.$idProduct.'" data-price="'.$product->get_price().'"></td>
                     <td class="html-price">'.wc_price($product->get_price()).'</td>
                     <td class="action">
                        <div class="iart-tooltip">

@@ -9,12 +9,11 @@
 		$sHtml = '<div class="modal-content box-config-product-step1">
 					<div class="modal-header">
 						<span class="close">&times;</span>
-						<h3 class="title">Chọn lựa không gian</h3>
+						<h3 class="title">Bạn đang muốn lựa chọn nội thất cho Nhà Riêng hay Chung Cư?</h3>
 					</div>
 					<div class="modal-body">
 						<div class="loader"></div>
-						
-						<h4 class="title">Vui lòng lựa chọn không gian</h4>
+						<h4 class="title">Vui lòng chọn loại Dự Án phù hợp</h4>
 						<div class="choose">';
 				
 		$sHtmlChoose = '';
@@ -25,7 +24,7 @@
 		$sHtml .= $sHtmlChoose;
 		$sHtml .= '</div>
 							<div class="action">
-								<button type="button" class="bottom btn-step1">Next <i class="fa fa-angle-right"></i></button>
+								<button type="button" class="bottom btn-step1">Tiếp <i class="fa fa-angle-right"></i></button>
 							</div>
 							
 							<div class="clear"></div>
@@ -35,7 +34,8 @@
 	
 	echo json_encode(
 		array(
-			'data' => $sHtml
+			'data' => $sHtml,
+			'msg' => '',
 		)
 	);
 	

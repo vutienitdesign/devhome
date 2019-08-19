@@ -22,8 +22,13 @@ $colorVang: #fed700;
     }
 }
 
+.builder-product{
+    th.action{
+        width: 110px;
+    }
+}
+
 td.action{
-    text-align: center;
     .button{
         background-color: $colorVang;
         color: #000;
@@ -45,6 +50,9 @@ td.action{
     }
 }
 
+td.action,
+th.date,
+td.date,
 th.action{
     text-align: center;
 }

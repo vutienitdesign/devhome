@@ -201,7 +201,7 @@
                 </td>
             </tr>
             <tr>
-                <th>Số lượng Click</th>
+                <th>Thống kê click chuột</th>
                 <td class="box-group">
 		            <?php
 			            $sHtml = '';
@@ -214,14 +214,19 @@
 					            'download-pdf'    => 'In báo giá',
 					            'add-cart'        => 'Thêm giỏ hàng',
 				            );
-				
+				            
 				            $i = 1;
 				            foreach($resultLog as $vLog){
+				                if(isset($arr[$vLog['type']])){
+				                    $sType = $arr[$vLog['type']];
+                                }else{
+					                $sType = $vLog['type'];
+                                }
 					            $sHtml .= '<tr>
                                                     <td class="stt">'.$i.'</td>
-                                                    <td>'.$arr[$vLog['type']].'</td>
+                                                    <td>'.$sType.'</td>
                                                     <td>'.$vLog['total'].'</td>
-                                                    <td>'.date('h:i:s d/m/Y', $vLog['date_update']).'</td>
+                                                    <td>'.date('d/m/Y h:i:s', $vLog['date_update']).'</td>
                                                 </tr>';
 					
 					            $i++;

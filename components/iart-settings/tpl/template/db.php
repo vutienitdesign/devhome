@@ -37,6 +37,20 @@
 			}else{
 				delete_option('_iart_formcart_tuvan');
 			}
+			
+			//ID Trang Xây dựng cấu hình sản phẩm
+			if(!empty($dataPoka['config_product'])){
+				update_option('_iart_page_config_product', $dataPoka['config_product']);
+			}else{
+				delete_option('_iart_page_config_product');
+			}
+			
+			//ID Trang Báo giá sản phẩm
+			if(!empty($dataPoka['baogia'])){
+				update_option('_iart_page_baogia', $dataPoka['baogia']);
+			}else{
+				delete_option('_iart_page_baogia');
+			}
 		}
 		
 		public function getData(){
@@ -46,6 +60,8 @@
 				'code_header' => stripslashes(get_option("_poka_code_header")),
 				'code_footer' => stripslashes(get_option("_poka_code_footer")),
 				'formcart' => get_option("_iart_formcart_tuvan"),
+				'config_product' => get_option("_iart_page_config_product"),
+				'baogia' => get_option("_iart_page_baogia"),
 			);
 		}
 	}

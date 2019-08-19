@@ -20,7 +20,7 @@
 		$sHtml = '<div class="modal-content box-set-product-vewall">
 					<div class="modal-header">
 						<span class="close">×</span>
-						<h3 class="title">Tất cả set đồ</h3>
+						<h3 class="title">'.count($aData).' Bộ Sưu Tập Phòng Ngủ Đang Có Sẵn</h3>
 					</div>
 					<div class="modal-body">
 						<div class="content-data">';

@@ -93,8 +93,8 @@
                         <td>'.$i.'</td>
                         <td>'.$v['name'].'</td>
                         <td>'.$sHtmlData.'</td>
-                        <td>'.date('d/m/Y h:i:s', $v['date']).'</td>
-                        <td>'.date('d/m/Y h:i:s', $v['date_update']).'</td>
+                        <td class="date">'.date('d/m/Y', $v['date']).' <br /> '.date('h:i:s', $v['date']).'</td>
+                        <td class="date">'.date('d/m/Y', $v['date_update']).' <br />'.date('h:i:s', $v['date_update']).'</td>
                         <td class="action">'.$sRestore.'</td>
                     </tr>';
 			$i++;
@@ -106,8 +106,8 @@
 					<th>STT</th>
 					<th>Tên dự án</th>
 					<th>Không gian</th>
-					<th>Ngày tạo</th>
-					<th>Ngày sửa</th>
+					<th class="date">Ngày tạo</th>
+					<th class="date">Ngày sửa</th>
 					<th class="action">Thao tác</th>
 				</tr>
 				<?php echo $sHtml; ?>
