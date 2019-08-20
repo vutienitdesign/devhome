@@ -94,7 +94,7 @@
 												</div>
 					                            <div class="action">
 					                            	'.$sTextActive.'
-					                            	<button type="button" value="'.$id.'" class="button add-config" data-type="'.$typeProduct.'" data-id="'.$idSmall.'" data-all="'.$allData.'" data-term="'.$v.'" data-product-edit="'.$idProductChange.'">Thêm vào cấu hình</button>
+					                            	<button type="button" value="'.$id.'" class="button add-config" data-type="'.$typeProduct.'" data-id="'.$idSmall.'" data-all="'.$allData.'" data-term="'.$v.'" data-product-edit="'.$idProductChange.'">Chọn sản phẩm này</button>
 												</div>
 					                        </div></div>';
 						endwhile;

@@ -226,7 +226,7 @@
                                                     <td class="stt">'.$i.'</td>
                                                     <td>'.$sType.'</td>
                                                     <td>'.$vLog['total'].'</td>
-                                                    <td>'.date('d/m/Y h:i:s', $vLog['date_update']).'</td>
+                                                    <td>'.date('d/m/Y - h:i:s', $vLog['date_update']).'</td>
                                                 </tr>';
 					
 					            $i++;

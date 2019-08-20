@@ -149,7 +149,7 @@
 						</div>
 						<div class="action">
 							'.$sTextActive.'
-							<button type="button" value="'.$id.'" data-id="'.$dataProductCurrent.'" class="button add-config" data-product="'.$idProductChange.'" data-type="'.$typeProduct.'" data-temp="'.$idProductTemp.'" data-term="'.$termID.'">Thêm vào cấu hình</button>
+							<button type="button" value="'.$id.'" data-id="'.$dataProductCurrent.'" class="button add-config" data-product="'.$idProductChange.'" data-type="'.$typeProduct.'" data-temp="'.$idProductTemp.'" data-term="'.$termID.'">Chọn sản phẩm này</button>
 						</div>
 						<div class="clear"></div>
 					</div>';
